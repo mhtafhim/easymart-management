@@ -114,10 +114,20 @@ public class RegisterPage extends javax.swing.JFrame {
         exitButton.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         exitButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/exit small.png"))); // NOI18N
         exitButton.setText("Exit");
+        exitButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                exitButtonActionPerformed(evt);
+            }
+        });
 
         LoginButton.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         LoginButton.setForeground(new java.awt.Color(255, 0, 0));
         LoginButton.setText("Login");
+        LoginButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                LoginButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -238,13 +248,26 @@ public class RegisterPage extends javax.swing.JFrame {
 
             System.out.println("Registration successfull");
               JOptionPane.showMessageDialog(null, "Registration successfull" , "Information", JOptionPane.INFORMATION_MESSAGE);
+              
 
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, ex.getMessage(),
-                    "Error", JOptionPane.INFORMATION_MESSAGE);
+            
+            JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", JOptionPane.INFORMATION_MESSAGE);
 
         }
     }//GEN-LAST:event_RegisterButtonActionPerformed
+
+    private void LoginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoginButtonActionPerformed
+        // TODO add your handling code here:
+        new LoginPage().setVisible(true);
+        
+        dispose();
+    }//GEN-LAST:event_LoginButtonActionPerformed
+
+    private void exitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitButtonActionPerformed
+        // TODO add your handling code here:
+        dispose();
+    }//GEN-LAST:event_exitButtonActionPerformed
 
     /**
      * @param args the command line arguments

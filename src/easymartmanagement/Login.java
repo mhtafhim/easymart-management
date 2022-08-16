@@ -5,6 +5,17 @@
  */
 package easymartmanagement;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import static jdk.nashorn.internal.objects.NativeString.toLowerCase;
+import static jdk.nashorn.internal.objects.NativeString.toUpperCase;
+
 /**
  *
  * @author AsifRahman
@@ -14,8 +25,19 @@ public class Login extends javax.swing.JFrame {
     /**
      * Creates new form Login
      */
+      Connection con;
+
     public Login() {
         initComponents();
+        try {
+            con = DriverManager.getConnection("jdbc:derby://localhost:1527/easymart");
+            if (con != null) {
+                System.out.println("connection establised");
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage(), "Error in connection", JOptionPane.INFORMATION_MESSAGE);
+        }
+       
     }
 
     /**
@@ -32,10 +54,15 @@ public class Login extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         txtloginEmail = new javax.swing.JTextField();
         txtLoginPassword = new javax.swing.JPasswordField();
-        LoginLogin = new javax.swing.JButton();
+        LoginButton = new javax.swing.JButton();
         LoginClear = new javax.swing.JButton();
         LoginExit = new javax.swing.JButton();
+<<<<<<< HEAD
+        signUpButton = new javax.swing.JButton();
+=======
         jButton1 = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
+>>>>>>> e6566eac884747e0e0d19216c516dcdb2059d589
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -43,43 +70,79 @@ public class Login extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
         jLabel1.setText("Login");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 40, -1, -1));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 30, -1, -1));
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel2.setText("Email:");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(316, 151, 72, -1));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 150, 72, -1));
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel3.setText("Password:");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(316, 240, -1, -1));
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 230, -1, -1));
 
         txtloginEmail.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        getContentPane().add(txtloginEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(406, 148, 362, -1));
+        getContentPane().add(txtloginEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 140, 362, -1));
 
         txtLoginPassword.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        getContentPane().add(txtLoginPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(406, 234, 362, -1));
+        getContentPane().add(txtLoginPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 230, 362, -1));
 
-        LoginLogin.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        LoginLogin.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/login.png"))); // NOI18N
-        LoginLogin.setText("Login");
-        getContentPane().add(LoginLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(462, 317, 119, 44));
+        LoginButton.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        LoginButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/login.png"))); // NOI18N
+        LoginButton.setText("Login");
+        LoginButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                LoginButtonActionPerformed(evt);
+            }
+        });
+        getContentPane().add(LoginButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 310, 119, 44));
 
         LoginClear.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         LoginClear.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/clear.png"))); // NOI18N
         LoginClear.setText("Clear");
-        getContentPane().add(LoginClear, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 317, 104, 44));
+        getContentPane().add(LoginClear, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 310, 104, 44));
 
         LoginExit.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         LoginExit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/exit small.png"))); // NOI18N
         LoginExit.setText("Exit");
-        getContentPane().add(LoginExit, new org.netbeans.lib.awtextra.AbsoluteConstraints(919, 490, 141, 51));
+        getContentPane().add(LoginExit, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 500, 141, 51));
 
-        jButton1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jButton1.setText("Sign up");
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 409, 120, 40));
+        signUpButton.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        signUpButton.setText("Sign up");
+        getContentPane().add(signUpButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 400, 120, 40));
+
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/loginPicBg.png"))); // NOI18N
+        jLabel4.setText("jLabel4");
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, -140, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void LoginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoginButtonActionPerformed
+        // TODO add your handling code here:
+         try {
+            // TODO add your handling code here:
+            String email = toLowerCase(txtloginEmail.getText());
+            String password = txtLoginPassword.getText();
+            String sql = "SELECT * FROM CASHIERS WHERE EMAIL = '" +email +"'";
+            Statement st = con.createStatement();
+            ResultSet rs = st.executeQuery(sql);
+            String pass = null;
+            while(rs.next())
+            {
+                
+                pass = rs.getString("PASSWORD");
+               
+            }
+            if(password.equals(pass))
+            {
+                 JOptionPane.showMessageDialog(null, "Login successfull" , "Information", JOptionPane.INFORMATION_MESSAGE);
+            }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(ItemListFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }//GEN-LAST:event_LoginButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -117,13 +180,17 @@ public class Login extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton LoginButton;
     private javax.swing.JButton LoginClear;
     private javax.swing.JButton LoginExit;
-    private javax.swing.JButton LoginLogin;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+<<<<<<< HEAD
+    private javax.swing.JButton signUpButton;
+=======
+    private javax.swing.JLabel jLabel4;
+>>>>>>> e6566eac884747e0e0d19216c516dcdb2059d589
     private javax.swing.JPasswordField txtLoginPassword;
     private javax.swing.JTextField txtloginEmail;
     // End of variables declaration//GEN-END:variables
