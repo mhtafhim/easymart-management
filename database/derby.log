@@ -1,0 +1,14 @@
+Tue Aug 16 22:45:02 BDT 2022 : Apache Derby Network Server - 10.14.2.0 - (1828579) started and ready to accept connections on port 1527
+----------------------------------------------------------------
+Tue Aug 16 22:45:02 BDT 2022:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.14.2.0 - (1828579): instance a816c00e-0182-a78b-52b2-000072174b14 
+on database directory C:\Users\Tafhim\Documents\NetBeansProjects\EasyMartManagement\database\easymart with class loader sun.misc.Launcher$AppClassLoader@1d44bcfa 
+Loaded from file:/C:/Users/Tafhim/Documents/GitHub/Easy-Mart/db-derby-10.14.2.0-bin/lib/derby.jar
+java.vendor=Oracle Corporation
+java.runtime.version=1.8.0_311-b11
+user.dir=C:\Users\Tafhim\Documents\GitHub\Easy-Mart\db-derby-10.14.2.0-bin
+os.name=Windows 10
+os.arch=amd64
+os.version=10.0
+derby.system.home=C:\Users\Tafhim\Documents\NetBeansProjects\EasyMartManagement\database
+Database Class Loader started - derby.database.classpath=''
