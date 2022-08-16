@@ -6,3 +6,12 @@ CREATE TABLE MEMBERS(
   "EMAIL" varchar(100) NOT NULL,
   "AREA" varchar(100) NOT NULL,
   "PHONE" varchar(100) NOT NULL);
+
+
+
+CREATE TABLE CASHIERS(
+  "NAME" varchar(100) NOT NULL,
+  "EMAIL" varchar(100) PRIMARY KEY,
+  "MOBILE" varchar(100) NOT NULL,
+  "ADDRESS" varchar(100) NOT NULL,
+  "PASSWORD" varchar(100) NOT NULL);
