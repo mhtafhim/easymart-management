@@ -7,10 +7,14 @@ package easymartmanagement;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import static jdk.nashorn.internal.objects.NativeString.toUpperCase;
 import net.proteanit.sql.DbUtils;
 
 /**
@@ -22,24 +26,24 @@ public class ItemListFrame extends javax.swing.JFrame {
     /**
      * Creates new form NewJFrame
      */
-     Connection con;
+    Connection con;
 
     public ItemListFrame() {
         initComponents();
         try {
             con = DriverManager.getConnection("jdbc:derby://localhost:1527/easymart");
-            if(con!=null)
+            if (con != null) {
                 System.out.println("connection establised");
+            }
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, ex.getMessage(), "Error in connection", JOptionPane.INFORMATION_MESSAGE);
         }
         showAll();
     }
 
-    
     private void showAll() {
         try {
-            String sql = "SELECT * FROM ITEMTABLE";
+            String sql = "SELECT * FROM ITEMTABLE ORDER BY ITEMDESCRIPTION ASC";
             Statement st = con.createStatement();
             ResultSet rs = st.executeQuery(sql);
             ITEMTABLE.setModel(DbUtils.resultSetToTableModel(rs));
@@ -75,10 +79,16 @@ public class ItemListFrame extends javax.swing.JFrame {
         updateItemButton = new javax.swing.JButton();
         unitPriceField = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
+        searchItemButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         deleteItemButton.setText("Delete Item");
+        deleteItemButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deleteItemButtonActionPerformed(evt);
+            }
+        });
 
         jLabel5.setText("Quantity");
 
@@ -153,6 +163,11 @@ public class ItemListFrame extends javax.swing.JFrame {
         });
 
         addItemButton.setText("Add Item");
+        addItemButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addItemButtonActionPerformed(evt);
+            }
+        });
 
         jLabel4.setText("Unit Price");
 
@@ -170,6 +185,13 @@ public class ItemListFrame extends javax.swing.JFrame {
         });
 
         jLabel1.setText("Item Code");
+
+        searchItemButton.setText("Search");
+        searchItemButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchItemButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -194,23 +216,29 @@ public class ItemListFrame extends javax.swing.JFrame {
                                 .addComponent(quantityField)
                                 .addComponent(itemCodeField, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(itemDescriptionField, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 189, Short.MAX_VALUE)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 126, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addComponent(addItemButton)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(addItemButton)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                                        .addGap(27, 27, 27)
+                                        .addComponent(jLabel4)))
+                                .addGap(35, 35, 35)
                                 .addComponent(updateItemButton)
-                                .addGap(52, 52, 52)
-                                .addComponent(deleteItemButton))
+                                .addGap(27, 27, 27)
+                                .addComponent(deleteItemButton)
+                                .addGap(26, 26, 26)
+                                .addComponent(searchItemButton)
+                                .addGap(21, 21, 21))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel3)
+                                .addGap(71, 71, 71)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING))
-                                .addGap(67, 67, 67)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(unitPriceField)
-                                    .addComponent(packSizeField, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE))))))
-                .addGap(21, 21, 21))
+                                    .addComponent(unitPriceField, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(packSizeField, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(50, 50, 50)))))
+                .addGap(12, 12, 12))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -229,25 +257,19 @@ public class ItemListFrame extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(unitPriceField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel4)))
+                .addGap(27, 27, 27)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(27, 27, 27)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(quantityField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel5))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(deleteItemButton))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(27, 27, 27)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(updateItemButton)
-                            .addComponent(addItemButton))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addGap(36, 36, 36)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(quantityField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel5))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(updateItemButton)
+                        .addComponent(addItemButton)
+                        .addComponent(deleteItemButton)
+                        .addComponent(searchItemButton)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(167, 167, 167))
+                .addGap(1320, 1320, 1320))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -258,7 +280,9 @@ public class ItemListFrame extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 613, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 613, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -266,6 +290,31 @@ public class ItemListFrame extends javax.swing.JFrame {
 
     private void updateItemButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateItemButtonActionPerformed
         // TODO add your handling code here:
+        int row = -1;
+        String itemCode = toUpperCase(itemCodeField.getText());
+        itemCodeField.setText("");
+        String itemDescription = itemDescriptionField.getText();
+        String packSize = packSizeField.getText();
+        String quantity = quantityField.getText();
+        int quantityint = Integer.parseInt(quantity);
+        String unitPrice = unitPriceField.getText();
+        itemDescriptionField.setText("");
+        packSizeField.setText("");
+        quantityField.setText("");
+        unitPriceField.setText("");
+        
+        try {
+            String sql = "UPDATE ITEMTABLE SET ITEMDESCRIPTION = '" + itemDescription + "', PACKSIZE = '" + packSize + "', QUANTITY = " + quantityint + ", UNITPRICE = '" + unitPrice + "' WHERE ITEMCODE = '" + itemCode+ "'";
+            Statement st = con.createStatement();
+            row = st.executeUpdate(sql);
+
+            JOptionPane.showMessageDialog(null, "Data update successful. Row:" + row, "Information", JOptionPane.INFORMATION_MESSAGE);
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", JOptionPane.INFORMATION_MESSAGE);
+
+        }
+        showAll();
     }//GEN-LAST:event_updateItemButtonActionPerformed
 
     private void quantityFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_quantityFieldActionPerformed
@@ -275,6 +324,84 @@ public class ItemListFrame extends javax.swing.JFrame {
     private void unitPriceFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_unitPriceFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_unitPriceFieldActionPerformed
+
+    private void addItemButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addItemButtonActionPerformed
+        // TODO add your handling code here:
+        int row = -1;
+        String itemCode = toUpperCase(itemCodeField.getText());
+        itemCodeField.setText("");
+        String itemDescription = itemDescriptionField.getText();
+        String packSize = packSizeField.getText();
+        String quantity = quantityField.getText();
+        int quantityint = Integer.parseInt(quantity);
+        String unitPrice = unitPriceField.getText();
+        itemDescriptionField.setText("");
+        packSizeField.setText("");
+        quantityField.setText("");
+        unitPriceField.setText("");
+        try {
+            String sql = "INSERT INTO ITEMTABLE(ITEMCODE,ITEMDESCRIPTION, PACKSIZE,UNITPRICE,QUANTITY) VALUES( ?,  ?,  ?,  ?, ?)";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setString(1, itemCode);
+            ps.setString(2, itemDescription);
+            ps.setString(3, packSize);
+            ps.setString(4, unitPrice);
+            ps.setInt(5, quantityint);
+
+            row = ps.executeUpdate();
+
+            System.out.println("Inserted successfully");
+            //  JOptionPane.showMessageDialog(null, "Data insertionsuccessful.Row:" + row, "Information", JOptionPane.INFORMATION_MESSAGE);
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage(),
+                    "Error", JOptionPane.INFORMATION_MESSAGE);
+
+        }
+        showAll();
+    }//GEN-LAST:event_addItemButtonActionPerformed
+
+    private void deleteItemButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteItemButtonActionPerformed
+        // TODO add your handling code here:
+        int row = -1;
+        try {
+            String itemCode = toUpperCase(itemCodeField.getText());
+            String sql = "DELETE FROM ITEMTABLE WHERE ITEMCODE = '" + itemCode + "'";
+
+            Statement st = con.createStatement();
+
+            row = st.executeUpdate(sql);
+
+            System.out.println("Deletion successful. Row:" + row + " Information");
+            //  JOptionPane.showMessageDialog(null, "Deletion successful. Row:" + row, "Information", JOptionPane.INFORMATION_MESSAGE);
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", JOptionPane.INFORMATION_MESSAGE);
+        }
+        showAll();
+    }//GEN-LAST:event_deleteItemButtonActionPerformed
+
+    private void searchItemButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchItemButtonActionPerformed
+        try {
+            // TODO add your handling code here:
+            String itemCode = toUpperCase(itemCodeField.getText());
+            String sql = "SELECT * FROM ITEMTABLE WHERE ITEMCODE = '" +itemCode +"'";
+            Statement st = con.createStatement();
+            ResultSet rs = st.executeQuery(sql);
+            
+            while(rs.next())
+            {
+                
+                itemDescriptionField.setText(rs.getString("ITEMDESCRIPTION"));
+                packSizeField.setText(rs.getString("PACKSIZE"));
+                quantityField.setText(rs.getString("QUANTITY"));
+                unitPriceField.setText(rs.getString("UNITPRICE"));
+            }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(ItemListFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_searchItemButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -327,6 +454,7 @@ public class ItemListFrame extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField packSizeField;
     private javax.swing.JTextField quantityField;
+    private javax.swing.JButton searchItemButton;
     private javax.swing.JTextField unitPriceField;
     private javax.swing.JButton updateItemButton;
     // End of variables declaration//GEN-END:variables

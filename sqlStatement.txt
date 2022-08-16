@@ -1,0 +1,8 @@
+CREATE TABLE MEMBERS(
+  "MEMBERID" varchar(100) PRIMARY KEY,
+  "MEMBERNAME" varchar(100) NOT NULL,
+  "ADDRESS" varchar(100) NOT NULL,
+  "REGISTERDATE" date NOT NULL,
+  "EMAIL" varchar(100) NOT NULL,
+  "AREA" varchar(100) NOT NULL,
+  "PHONE" varchar(100) NOT NULL);
