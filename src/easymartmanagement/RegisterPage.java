@@ -217,6 +217,7 @@ public class RegisterPage extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtAddressActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtAddressActionPerformed
@@ -236,13 +237,14 @@ public class RegisterPage extends javax.swing.JFrame {
         txtMobile.setText("");
         txtPassword.setText("");
         try {
-            String sql = "INSERT INTO CASHIERS(NAME,EMAIL, MOBILE,ADDRESS,PASSWORD) VALUES( ?,  ?,  ?,  ?, ?)";
+            String sql = "INSERT INTO LOGINDATA(NAME,EMAIL, MOBILE,ADDRESS,PASSWORD,ROLE) VALUES( ?,  ?,  ?,  ?, ?,?)";
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setString(1, name);
             ps.setString(2, email);
             ps.setString(3, mobile);
             ps.setString(4, address);
             ps.setString(5, password);
+            ps.setString(6,"cashier");
 
             row = ps.executeUpdate();
 

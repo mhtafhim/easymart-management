@@ -13,8 +13,11 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import static jdk.nashorn.internal.objects.NativeString.toUpperCase;
 import net.proteanit.sql.DbUtils;
@@ -41,6 +44,8 @@ public class MembersFrame extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, ex.getMessage(), "Error in connection", JOptionPane.INFORMATION_MESSAGE);
         }
         showAll();
+        
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }
 
     private void showAll() {
@@ -67,13 +72,11 @@ public class MembersFrame extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
         memberIDField = new javax.swing.JTextField();
         memberField = new javax.swing.JTextField();
         addressField = new javax.swing.JTextField();
-        registerdateField = new javax.swing.JTextField();
         emailField = new javax.swing.JTextField();
         phoneField = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -84,6 +87,7 @@ public class MembersFrame extends javax.swing.JFrame {
         searchMember = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jButton1.setText("Member ID");
         jButton1.setActionCommand("memberid");
@@ -92,8 +96,10 @@ public class MembersFrame extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(53, 16, 125, -1));
 
         jButton2.setText("Member Name");
+        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(53, 63, 125, -1));
 
         jButton3.setText("Address");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -101,18 +107,24 @@ public class MembersFrame extends javax.swing.JFrame {
                 jButton3ActionPerformed(evt);
             }
         });
-
-        jButton4.setText("Register Date");
+        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(53, 110, 125, -1));
 
         jButton5.setText("Email");
+        getContentPane().add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 16, 139, -1));
 
         jButton6.setText("Phone Number");
+        getContentPane().add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 63, -1, -1));
 
         memberIDField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 memberIDFieldActionPerformed(evt);
             }
         });
+        getContentPane().add(memberIDField, new org.netbeans.lib.awtextra.AbsoluteConstraints(207, 17, 225, -1));
+        getContentPane().add(memberField, new org.netbeans.lib.awtextra.AbsoluteConstraints(207, 64, 225, -1));
+        getContentPane().add(addressField, new org.netbeans.lib.awtextra.AbsoluteConstraints(207, 111, 225, -1));
+        getContentPane().add(emailField, new org.netbeans.lib.awtextra.AbsoluteConstraints(647, 17, 301, -1));
+        getContentPane().add(phoneField, new org.netbeans.lib.awtextra.AbsoluteConstraints(647, 64, 301, -1));
 
         MEMBERTABLE.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -223,12 +235,15 @@ public class MembersFrame extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(MEMBERTABLE);
 
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(53, 212, 895, -1));
+
         addMember.setText("Add Member");
         addMember.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 addMemberActionPerformed(evt);
             }
         });
+        getContentPane().add(addMember, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 110, 240, 30));
 
         updateMember.setText("Update Member Info");
         updateMember.addActionListener(new java.awt.event.ActionListener() {
@@ -236,6 +251,7 @@ public class MembersFrame extends javax.swing.JFrame {
                 updateMemberActionPerformed(evt);
             }
         });
+        getContentPane().add(updateMember, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 110, 210, -1));
 
         deleteMember.setText("Delete Member");
         deleteMember.addActionListener(new java.awt.event.ActionListener() {
@@ -243,6 +259,7 @@ public class MembersFrame extends javax.swing.JFrame {
                 deleteMemberActionPerformed(evt);
             }
         });
+        getContentPane().add(deleteMember, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 160, 240, -1));
 
         searchMember.setText("Search ");
         searchMember.addActionListener(new java.awt.event.ActionListener() {
@@ -250,84 +267,10 @@ public class MembersFrame extends javax.swing.JFrame {
                 searchMemberActionPerformed(evt);
             }
         });
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(53, 53, 53)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane1)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(78, 78, 78)
-                                .addComponent(addMember, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
-                                .addComponent(updateMember, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 125, Short.MAX_VALUE)
-                                    .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addGap(29, 29, 29)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(memberIDField)
-                                    .addComponent(memberField)
-                                    .addComponent(addressField, javax.swing.GroupLayout.DEFAULT_SIZE, 225, Short.MAX_VALUE))))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(38, 38, 38)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jButton6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addGap(38, 38, 38)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(registerdateField, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(emailField)
-                                    .addComponent(phoneField, javax.swing.GroupLayout.DEFAULT_SIZE, 301, Short.MAX_VALUE)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(84, 84, 84)
-                                .addComponent(deleteMember, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(53, 53, 53)
-                                .addComponent(searchMember, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(62, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton4)
-                    .addComponent(memberIDField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(registerdateField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton2)
-                    .addComponent(jButton5)
-                    .addComponent(memberField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(emailField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton3)
-                    .addComponent(jButton6)
-                    .addComponent(addressField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(phoneField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(addMember)
-                    .addComponent(updateMember)
-                    .addComponent(deleteMember)
-                    .addComponent(searchMember))
-                .addGap(26, 26, 26)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+        getContentPane().add(searchMember, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 159, 210, 30));
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -349,22 +292,25 @@ public class MembersFrame extends javax.swing.JFrame {
         memberIDField.setText("");
         String memberName = memberField.getText();
         String address = addressField.getText();
-        String register = registerdateField.getText();
+        Date date = Calendar.getInstance().getTime();  
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-M-dd");   
+        String register2 = dateFormat.format(date);
+        
         String mail = emailField.getText();
         String phone = phoneField.getText();
         memberField.setText("");
         addressField.setText("");
-        registerdateField.setText("");
+      
         emailField.setText("");
         phoneField.setText("");
-        
+      //  System.out.println(register2);
         try {
             String sql = "INSERT INTO MEMBERS(MEMBERID,MEMBERNAME, ADDRESS,REGISTERDATE,EMAIL,PHONE) VALUES( ?,  ?,  ?,  ?, ?,?)";
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setString(1, memberID);
             ps.setString(2, memberName);
             ps.setString(3, address);
-            ps.setString(4, register);
+            ps.setString(4, register2);
             ps.setString(5, mail);
             ps.setString(6, phone);
 
@@ -408,7 +354,7 @@ public class MembersFrame extends javax.swing.JFrame {
       //  memberIDField.setText("");
         String memberName = memberField.getText();
         String address = addressField.getText();
-        String register = registerdateField.getText();
+      
         String mail = emailField.getText();
         String phone = phoneField.getText();
   //      memberField.setText("");
@@ -419,7 +365,7 @@ public class MembersFrame extends javax.swing.JFrame {
         
         
         try {
-            String sql = "UPDATE MEMBERS SET MEMBERNAME = '" + memberName + "', ADDRESS = '" + address + "', REGISTERDATE = '" + register + "', EMAIL = '" + mail + "', PHONE = '" + phone + "' WHERE MEMBERID = '" + memberID+ "'";
+            String sql = "UPDATE MEMBERS SET MEMBERNAME = '" + memberName + "', ADDRESS = '" + address +  "', EMAIL = '" + mail + "', PHONE = '" + phone + "' WHERE MEMBERID = '" + memberID+ "'";
             Statement st = con.createStatement();
             row = st.executeUpdate(sql);
 
@@ -450,7 +396,7 @@ public class MembersFrame extends javax.swing.JFrame {
                 memberField.setText(rs.getString("MEMBERNAME"));
                 addressField.setText(rs.getString("ADDRESS"));
                 String strDate = dateFormat.format(rs.getDate("REGISTERDATE"));
-                registerdateField.setText(strDate);
+                
                 emailField.setText(rs.getString("EMAIL"));
                 phoneField.setText(rs.getString("PHONE"));
             }
@@ -504,14 +450,12 @@ public class MembersFrame extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField memberField;
     private javax.swing.JTextField memberIDField;
     private javax.swing.JTextField phoneField;
-    private javax.swing.JTextField registerdateField;
     private javax.swing.JButton searchMember;
     private javax.swing.JButton updateMember;
     // End of variables declaration//GEN-END:variables

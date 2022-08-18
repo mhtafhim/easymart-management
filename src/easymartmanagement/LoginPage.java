@@ -166,6 +166,7 @@ public class LoginPage extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void LoginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoginButtonActionPerformed
@@ -174,19 +175,28 @@ public class LoginPage extends javax.swing.JFrame {
             // TODO add your handling code here:
             String email = toLowerCase(txtloginEmail.getText());
             String password = txtLoginPassword.getText();
-            String sql = "SELECT * FROM CASHIERS WHERE EMAIL = '" +email +"'";
+            String sql = "SELECT * FROM LOGINDATA WHERE EMAIL = '" +email +"'";
             Statement st = con.createStatement();
             ResultSet rs = st.executeQuery(sql);
             String pass = null;
+            String role = null;
             while(rs.next())
             {
 
                 pass = rs.getString("PASSWORD");
+                role = rs.getString("ROLE");
+                
 
             }
-            if(password.equals(pass))
+            System.out.println("button working");
+            if(password.equals(pass) && role.equals("admin"))
             {
-                JOptionPane.showMessageDialog(null, "Login successfull" , "Information", JOptionPane.INFORMATION_MESSAGE);
+                new Dashboard().setVisible(true);
+                dispose();
+               // JOptionPane.showMessageDialog(null, "Login successfull" , "Information", JOptionPane.INFORMATION_MESSAGE);
+            }else if(password.equals(pass) && role.equals("cashier")){
+                new PlaceOrderFrame().setVisible(true);
+                dispose();
             }
             else
             {
