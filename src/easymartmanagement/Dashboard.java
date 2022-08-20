@@ -97,7 +97,7 @@ public class Dashboard extends javax.swing.JFrame {
             }
         });
 
-        ItemButton2.setText("Items");
+        ItemButton2.setText("About");
         ItemButton2.setRadius(50);
         ItemButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
