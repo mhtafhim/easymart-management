@@ -40,22 +40,18 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Component id="jLabel1" pref="240" max="32767" attributes="0"/>
-              <Group type="102" attributes="0">
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jButton1" max="32767" attributes="0"/>
-                      <Component id="jButton8" alignment="1" max="32767" attributes="0"/>
-                      <Component id="gotoMemberButton" alignment="1" max="32767" attributes="0"/>
-                      <Component id="gotoItemButton" alignment="1" max="32767" attributes="0"/>
-                      <Component id="LogoutButton" alignment="0" max="32767" attributes="0"/>
-                  </Group>
-                  <EmptySpace max="-2" attributes="0"/>
-              </Group>
+              <Component id="jLabel1" max="32767" attributes="0"/>
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
-                  <Component id="gotoCashierButton" min="-2" pref="194" max="-2" attributes="0"/>
-                  <EmptySpace max="32767" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="ItemButton2" min="-2" pref="194" max="-2" attributes="0"/>
+                      <Component id="LogoutButton" min="-2" pref="194" max="-2" attributes="0"/>
+                      <Component id="AllReportButton" min="-2" pref="194" max="-2" attributes="0"/>
+                      <Component id="gotoCashierButton" min="-2" pref="194" max="-2" attributes="0"/>
+                      <Component id="EasyMembersButton" alignment="0" min="-2" pref="194" max="-2" attributes="0"/>
+                      <Component id="ItemButton" alignment="0" min="-2" pref="194" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace pref="26" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -65,17 +61,17 @@
                   <Component id="jLabel1" min="-2" pref="97" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="gotoCashierButton" min="-2" pref="51" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
-                  <Component id="jButton8" min="-2" pref="56" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Component id="gotoMemberButton" min="-2" pref="56" max="-2" attributes="0"/>
+                  <Component id="AllReportButton" min="-2" pref="51" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Component id="gotoItemButton" min="-2" pref="56" max="-2" attributes="0"/>
-                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Component id="jButton1" min="-2" pref="56" max="-2" attributes="0"/>
-                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Component id="LogoutButton" min="-2" pref="56" max="-2" attributes="0"/>
-                  <EmptySpace pref="81" max="32767" attributes="0"/>
+                  <Component id="EasyMembersButton" min="-2" pref="51" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
+                  <Component id="ItemButton" min="-2" pref="51" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
+                  <Component id="ItemButton2" min="-2" pref="51" max="-2" attributes="0"/>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <Component id="LogoutButton" min="-2" pref="51" max="-2" attributes="0"/>
+                  <EmptySpace pref="80" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -90,40 +86,6 @@
             <Property name="text" type="java.lang.String" value="Easy Mart"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JButton" name="jButton1">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="About"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JButton" name="jButton8">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="All Report"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JButton" name="gotoMemberButton">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Easy Members"/>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="gotoMemberButtonActionPerformed"/>
-          </Events>
-        </Component>
-        <Component class="javax.swing.JButton" name="gotoItemButton">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Items"/>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="gotoItemButtonActionPerformed"/>
-          </Events>
-        </Component>
-        <Component class="javax.swing.JButton" name="LogoutButton">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Logout"/>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="LogoutButtonActionPerformed"/>
-          </Events>
-        </Component>
         <Component class="button.MyButton" name="gotoCashierButton">
           <Properties>
             <Property name="text" type="java.lang.String" value="Cashiers List"/>
@@ -131,6 +93,51 @@
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="gotoCashierButtonActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="button.MyButton" name="AllReportButton">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="All Report"/>
+            <Property name="radius" type="int" value="50"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="AllReportButtonActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="button.MyButton" name="EasyMembersButton">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Easy Members"/>
+            <Property name="radius" type="int" value="50"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="EasyMembersButtonActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="button.MyButton" name="ItemButton">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Items"/>
+            <Property name="radius" type="int" value="50"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ItemButtonActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="button.MyButton" name="LogoutButton">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Logout"/>
+            <Property name="radius" type="int" value="50"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="LogoutButtonActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="button.MyButton" name="ItemButton2">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Items"/>
+            <Property name="radius" type="int" value="50"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ItemButton2ActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>

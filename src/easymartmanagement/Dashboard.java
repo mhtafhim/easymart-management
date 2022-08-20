@@ -29,12 +29,12 @@ public class Dashboard extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton8 = new javax.swing.JButton();
-        gotoMemberButton = new javax.swing.JButton();
-        gotoItemButton = new javax.swing.JButton();
-        LogoutButton = new javax.swing.JButton();
         gotoCashierButton = new button.MyButton();
+        AllReportButton = new button.MyButton();
+        EasyMembersButton = new button.MyButton();
+        ItemButton = new button.MyButton();
+        LogoutButton = new button.MyButton();
+        ItemButton2 = new button.MyButton();
         jPanel2 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
@@ -57,31 +57,6 @@ public class Dashboard extends javax.swing.JFrame {
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Easy Mart");
 
-        jButton1.setText("About");
-
-        jButton8.setText("All Report");
-
-        gotoMemberButton.setText("Easy Members");
-        gotoMemberButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                gotoMemberButtonActionPerformed(evt);
-            }
-        });
-
-        gotoItemButton.setText("Items");
-        gotoItemButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                gotoItemButtonActionPerformed(evt);
-            }
-        });
-
-        LogoutButton.setText("Logout");
-        LogoutButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                LogoutButtonActionPerformed(evt);
-            }
-        });
-
         gotoCashierButton.setText("Cashiers List");
         gotoCashierButton.setRadius(50);
         gotoCashierButton.addActionListener(new java.awt.event.ActionListener() {
@@ -90,24 +65,61 @@ public class Dashboard extends javax.swing.JFrame {
             }
         });
 
+        AllReportButton.setText("All Report");
+        AllReportButton.setRadius(50);
+        AllReportButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AllReportButtonActionPerformed(evt);
+            }
+        });
+
+        EasyMembersButton.setText("Easy Members");
+        EasyMembersButton.setRadius(50);
+        EasyMembersButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EasyMembersButtonActionPerformed(evt);
+            }
+        });
+
+        ItemButton.setText("Items");
+        ItemButton.setRadius(50);
+        ItemButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ItemButtonActionPerformed(evt);
+            }
+        });
+
+        LogoutButton.setText("Logout");
+        LogoutButton.setRadius(50);
+        LogoutButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                LogoutButtonActionPerformed(evt);
+            }
+        });
+
+        ItemButton2.setText("Items");
+        ItemButton2.setRadius(50);
+        ItemButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ItemButton2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 240, Short.MAX_VALUE)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton8, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(gotoMemberButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(gotoItemButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(LogoutButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
+            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(20, 20, 20)
-                .addComponent(gotoCashierButton, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(ItemButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(LogoutButton, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(AllReportButton, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(gotoCashierButton, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(EasyMembersButton, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(ItemButton, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(26, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -115,17 +127,17 @@ public class Dashboard extends javax.swing.JFrame {
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(gotoCashierButton, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(25, 25, 25)
-                .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(gotoMemberButton, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(AllReportButton, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(gotoItemButton, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(LogoutButton, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(81, Short.MAX_VALUE))
+                .addComponent(EasyMembersButton, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(28, 28, 28)
+                .addComponent(ItemButton, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(27, 27, 27)
+                .addComponent(ItemButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(LogoutButton, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(80, Short.MAX_VALUE))
         );
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 240, 610));
@@ -279,26 +291,30 @@ public class Dashboard extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void gotoItemButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gotoItemButtonActionPerformed
-        // TODO add your handling code here:
-        new ItemListFrame().setVisible(true);
-    }//GEN-LAST:event_gotoItemButtonActionPerformed
-
-    private void gotoMemberButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gotoMemberButtonActionPerformed
-        // TODO add your handling code here:
-        new MembersFrame().setVisible(true);
-    }//GEN-LAST:event_gotoMemberButtonActionPerformed
-
-    private void LogoutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LogoutButtonActionPerformed
-        // TODO add your handling code here:
-        new LoginPage().setVisible(true);
-        dispose();
-    }//GEN-LAST:event_LogoutButtonActionPerformed
-
     private void gotoCashierButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gotoCashierButtonActionPerformed
         // TODO add your handling code here:
         new CashierList().setVisible(true);
     }//GEN-LAST:event_gotoCashierButtonActionPerformed
+
+    private void AllReportButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AllReportButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_AllReportButtonActionPerformed
+
+    private void EasyMembersButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EasyMembersButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_EasyMembersButtonActionPerformed
+
+    private void ItemButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ItemButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ItemButtonActionPerformed
+
+    private void LogoutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LogoutButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_LogoutButtonActionPerformed
+
+    private void ItemButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ItemButton2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ItemButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -336,12 +352,12 @@ public class Dashboard extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton LogoutButton;
+    private button.MyButton AllReportButton;
+    private button.MyButton EasyMembersButton;
+    private button.MyButton ItemButton;
+    private button.MyButton ItemButton2;
+    private button.MyButton LogoutButton;
     private button.MyButton gotoCashierButton;
-    private javax.swing.JButton gotoItemButton;
-    private javax.swing.JButton gotoMemberButton;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton8;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
