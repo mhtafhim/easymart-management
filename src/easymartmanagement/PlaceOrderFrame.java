@@ -837,6 +837,9 @@ public class PlaceOrderFrame extends javax.swing.JFrame {
 
         totalPriceInTotalSection = totalPriceInTotalSection + Double.parseDouble(totalPrice);
         totalAmount.setText(Double.toString(totalPriceInTotalSection));
+        
+        double calculateValue = calculateDiscountAndVat(0, 15);
+        totalWithVAT.setText(Double.toString(calculateValue));
 
         try {
             String sql = "INSERT INTO PLACEORDER(ITEMCODE,ITEMNAME, ITEMPRICE,TOTALPRICE,QUANTITY) VALUES( ?,  ?,  ?,  ?, ?)";
@@ -844,7 +847,7 @@ public class PlaceOrderFrame extends javax.swing.JFrame {
             ps.setString(1, itemCode);
             ps.setString(2, itemName);
             ps.setString(3, unitPrice);
-            ps.setString(4, totalPrice);
+            ps.setString(4, totalWithVAT.getText());
             ps.setString(5, quantity);
 
             row = ps.executeUpdate();
@@ -857,8 +860,7 @@ public class PlaceOrderFrame extends javax.swing.JFrame {
                     "Error", JOptionPane.INFORMATION_MESSAGE);
 
         }
-        double calculateValue = calculateDiscountAndVat(0, 15);
-        totalWithVAT.setText(Double.toString(calculateValue));
+        
         showAll();
     }//GEN-LAST:event_addCartButtonActionPerformed
 
@@ -914,7 +916,7 @@ public class PlaceOrderFrame extends javax.swing.JFrame {
 
         double totalParcentage = VAT - discount;
 
-        double parcentageValue = (totalParcentage * Double.parseDouble(totalAmount.getText()));
+        double parcentageValue = (totalParcentage * Double.parseDouble(totalAmount.getText()))/100;
 
         double ans = Double.parseDouble(totalAmount.getText()) + parcentageValue;
 
