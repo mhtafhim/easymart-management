@@ -57,7 +57,7 @@ public class RegisterPage extends javax.swing.JFrame {
         txtAddress = new textfield.TextField();
         txtPassword = new textfield.TextField();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(153, 0, 0));

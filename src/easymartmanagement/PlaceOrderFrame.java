@@ -6,17 +6,24 @@
 package easymartmanagement;
 
 import com.sun.glass.events.KeyEvent;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.Timer;
 import static jdk.nashorn.internal.objects.NativeString.toUpperCase;
 import net.proteanit.sql.DbUtils;
 
@@ -29,10 +36,12 @@ public class PlaceOrderFrame extends javax.swing.JFrame {
     /**
      * Creates new form PlaceOrderFrame
      */
+    int totalQuantity = 0;
+    double totalPriceInTotalSection = 0;
+    double discount;
+    double totalWithVATAmount;
 
-  
-  
-  Connection con;
+    Connection con;
 
     public PlaceOrderFrame() {
         initComponents();
@@ -44,10 +53,67 @@ public class PlaceOrderFrame extends javax.swing.JFrame {
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, ex.getMessage(), "Error in connection", JOptionPane.INFORMATION_MESSAGE);
         }
-      
+
+        this.addWindowListener(new WindowAdapter() {
+            public void windowClosing(WindowEvent e) {
+                int choose = JOptionPane.showConfirmDialog(null,
+                        "Do you really want to exit the application ?",
+                        "Confirm Close", JOptionPane.YES_NO_OPTION,
+                        JOptionPane.INFORMATION_MESSAGE);
+                if (choose == JOptionPane.YES_OPTION) {
+                    e.getWindow().dispose();
+                    System.out.println("close");
+                    removeAllListedItemButtonActionPerformed();
+
+                } else {
+                    System.out.println("do nothing");
+                }
+            }
+        });
+
+         dt(); // daet
+        
+        times(); // time
+        
     }
-    
-     private void showAll() {
+
+    public void dt() {
+
+        Date d = new Date();
+
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MMM-dd");
+
+        String dd = sdf.format(d);
+        dateLabel.setText(dd);
+
+    }
+
+// time
+    Timer t;
+    SimpleDateFormat st;
+
+    public void times() {
+
+        t = new Timer(0, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+
+                Date dt = new Date();
+                st = new SimpleDateFormat("hh:mm:ss a");
+
+                String tt = st.format(dt);
+                timeLabel.setText(tt);
+
+            }
+
+        });
+
+        t.start();
+
+    }
+
+    private void showAll() {
         try {
             String sql = "SELECT * FROM PLACEORDER ";
             Statement st = con.createStatement();
@@ -59,6 +125,7 @@ public class PlaceOrderFrame extends javax.swing.JFrame {
         }
 
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -84,15 +151,15 @@ public class PlaceOrderFrame extends javax.swing.JFrame {
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
-        jLabel13 = new javax.swing.JLabel();
+        dateLabel = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
-        jLabel15 = new javax.swing.JLabel();
+        timeLabel = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
         itemNameField = new textfield.TextField();
         itemCodeField = new textfield.TextField();
         quantityField = new textfield.TextField();
         priceField = new textfield.TextField();
-        myButton1 = new button.MyButton();
+        searchItemButton = new button.MyButton();
         addCartButton = new button.MyButton();
         packsizeField = new textfield.TextField();
         jLabel16 = new javax.swing.JLabel();
@@ -120,7 +187,7 @@ public class PlaceOrderFrame extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         myButton4 = new button.MyButton();
         myButton5 = new button.MyButton();
-        myButton6 = new button.MyButton();
+        removeAllListedItemButton = new button.MyButton();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -137,7 +204,7 @@ public class PlaceOrderFrame extends javax.swing.JFrame {
 
         jToggleButton1.setText("jToggleButton1");
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setBackground(new java.awt.Color(0, 153, 153));
@@ -150,6 +217,11 @@ public class PlaceOrderFrame extends javax.swing.JFrame {
 
         LogoutButton.setText("Log Out");
         LogoutButton.setRadius(20);
+        LogoutButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                LogoutButtonActionPerformed(evt);
+            }
+        });
         jPanel1.add(LogoutButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 510, 250, 40));
 
         myButton8.setText("Add Easy Member");
@@ -191,16 +263,16 @@ public class PlaceOrderFrame extends javax.swing.JFrame {
         jLabel12.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel12.setText("Order Date :");
 
-        jLabel13.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel13.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel13.setText("2022-02-03 ");
+        dateLabel.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        dateLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        dateLabel.setText("2022-02-03 ");
 
         jLabel14.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel14.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel14.setText("Time ");
 
-        jLabel15.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel15.setText("00: 00 : 00");
+        timeLabel.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        timeLabel.setText("00: 00 : 00");
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -218,11 +290,11 @@ public class PlaceOrderFrame extends javax.swing.JFrame {
                         .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGap(18, 18, 18)
-                        .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(dateLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel14, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel15, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(timeLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel4Layout.setVerticalGroup(
@@ -243,8 +315,8 @@ public class PlaceOrderFrame extends javax.swing.JFrame {
                         .addGap(16, 16, 16))
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(timeLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(dateLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
 
@@ -272,12 +344,12 @@ public class PlaceOrderFrame extends javax.swing.JFrame {
         priceField.setBackground(new java.awt.Color(153, 255, 204));
         priceField.setLabelText("Price");
 
-        myButton1.setText("Search");
-        myButton1.setBorderColor(new java.awt.Color(204, 204, 204));
-        myButton1.setRadius(30);
-        myButton1.addActionListener(new java.awt.event.ActionListener() {
+        searchItemButton.setText("Search");
+        searchItemButton.setBorderColor(new java.awt.Color(204, 204, 204));
+        searchItemButton.setRadius(30);
+        searchItemButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                myButton1ActionPerformed(evt);
+                searchItemButtonActionPerformed(evt);
             }
         });
 
@@ -314,7 +386,7 @@ public class PlaceOrderFrame extends javax.swing.JFrame {
                     .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(myButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(searchItemButton, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(jPanel5Layout.createSequentialGroup()
                             .addGap(34, 34, 34)
                             .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -332,7 +404,7 @@ public class PlaceOrderFrame extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(itemCodeField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(myButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(searchItemButton, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(itemNameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -375,6 +447,11 @@ public class PlaceOrderFrame extends javax.swing.JFrame {
         discountField.setBackground(new java.awt.Color(153, 255, 204));
         discountField.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         discountField.setOpaque(false);
+        discountField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                discountFieldKeyPressed(evt);
+            }
+        });
 
         jLabel9.setText("Total with Discount + VAT 15% : ");
 
@@ -500,8 +577,7 @@ public class PlaceOrderFrame extends javax.swing.JFrame {
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
-        PLACEORDERTABLE.setBackground(new java.awt.Color(153, 204, 255));
-        PLACEORDERTABLE.setForeground(new java.awt.Color(204, 204, 255));
+        PLACEORDERTABLE.setBackground(new java.awt.Color(0, 153, 204));
         PLACEORDERTABLE.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
@@ -529,6 +605,8 @@ public class PlaceOrderFrame extends javax.swing.JFrame {
                 "ITEMCODE", "ITEMNAME", "ITEMPRICE", "QUANTITY", "TOTALPRICE"
             }
         ));
+        PLACEORDERTABLE.setGridColor(new java.awt.Color(0, 0, 0));
+        PLACEORDERTABLE.setSelectionForeground(new java.awt.Color(0, 0, 0));
         jScrollPane2.setViewportView(PLACEORDERTABLE);
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
@@ -545,9 +623,14 @@ public class PlaceOrderFrame extends javax.swing.JFrame {
         myButton5.setBorderColor(new java.awt.Color(204, 204, 204));
         myButton5.setRadius(30);
 
-        myButton6.setText("Remove");
-        myButton6.setBorderColor(new java.awt.Color(204, 204, 204));
-        myButton6.setRadius(30);
+        removeAllListedItemButton.setText("Remove");
+        removeAllListedItemButton.setBorderColor(new java.awt.Color(204, 204, 204));
+        removeAllListedItemButton.setRadius(30);
+        removeAllListedItemButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                removeAllListedItemButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -577,7 +660,7 @@ public class PlaceOrderFrame extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(myButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(removeAllListedItemButton, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(50, 50, 50)
                         .addComponent(myButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(37, 37, 37)
@@ -605,8 +688,8 @@ public class PlaceOrderFrame extends javax.swing.JFrame {
                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(myButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(myButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(myButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(24, Short.MAX_VALUE))
+                    .addComponent(removeAllListedItemButton, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 0, 830, 570));
@@ -617,150 +700,148 @@ public class PlaceOrderFrame extends javax.swing.JFrame {
 
     private void searchMemberActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchMemberActionPerformed
         // TODO add your handling code here:
-           try {
+        try {
             // TODO add your handling code here:
             String memberID = toUpperCase(memberIDField.getText());
-            String sql = "SELECT * FROM MEMBERS WHERE MEMBERID = '" +memberID +"'";
+            String sql = "SELECT * FROM MEMBERS WHERE MEMBERID = '" + memberID + "'";
             Statement st = con.createStatement();
             ResultSet rs = st.executeQuery(sql);
-          //  SimpleDateFormat formatter = null;
-         
-            while(rs.next())
-            {
-                
+            //  SimpleDateFormat formatter = null;
+
+            while (rs.next()) {
+
                 CustomerNameField.setText(rs.getString("MEMBERNAME"));
                 addressField.setText(rs.getString("ADDRESS"));
                 emailField.setText(rs.getString("EMAIL"));
                 phoneField.setText(rs.getString("PHONE"));
             }
-            
+
         } catch (SQLException ex) {
             Logger.getLogger(ItemListFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_searchMemberActionPerformed
-    
-    private void calculateTotalPrice()
-    {
-         double quantity = Double.parseDouble(quantityField.getText());
-         double price = Double.parseDouble(priceField.getText());
-         String totalPrice = Double.toString(quantity * price) ; 
-         
-         totalPriceLabel.setText(totalPrice);
+
+    private void calculateTotalPrice() {
+        double quantity = Double.parseDouble(quantityField.getText());
+        double price = Double.parseDouble(priceField.getText());
+        String totalPrice = Double.toString(quantity * price);
+
+        totalPriceLabel.setText(totalPrice);
     }
-    
-    private void myButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_myButton1ActionPerformed
+
+    private void searchItemButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchItemButtonActionPerformed
         // TODO add your handling code here:
-         try {
+        try {
             // TODO add your handling code here:
             String itemCode = toUpperCase(itemCodeField.getText());
-            String sql = "SELECT * FROM ITEMTABLE WHERE ITEMCODE = '" +itemCode +"'";
+            String sql = "SELECT * FROM ITEMTABLE WHERE ITEMCODE = '" + itemCode + "'";
             Statement st = con.createStatement();
             ResultSet rs = st.executeQuery(sql);
-           
-            while(rs.next())
-            {
-                
+
+            while (rs.next()) {
+
                 itemNameField.setText(rs.getString("ITEMDESCRIPTION"));
                 packsizeField.setText(rs.getString("PACKSIZE"));
-                
+
                 priceField.setText(rs.getString("UNITPRICE"));
             }
-                  
+
         } catch (SQLException ex) {
             Logger.getLogger(ItemListFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_myButton1ActionPerformed
+    }//GEN-LAST:event_searchItemButtonActionPerformed
 
     private void quantityFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_quantityFieldKeyPressed
         // TODO add your handling code here: 
-        if(evt.getKeyCode()== KeyEvent.VK_ENTER){
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             calculateTotalPrice();
         }
     }//GEN-LAST:event_quantityFieldKeyPressed
 
     private void itemCodeFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_itemCodeFieldKeyPressed
         // TODO add your handling code here:
-         if(evt.getKeyCode()== KeyEvent.VK_ENTER){
-             try {
-            // TODO add your handling code here:
-            String itemCode = toUpperCase(itemCodeField.getText());
-            String sql = "SELECT * FROM ITEMTABLE WHERE ITEMCODE = '" +itemCode +"'";
-            Statement st = con.createStatement();
-            ResultSet rs = st.executeQuery(sql);
-           
-            while(rs.next())
-            {
-                
-                itemNameField.setText(rs.getString("ITEMDESCRIPTION"));
-                packsizeField.setText(rs.getString("PACKSIZE"));
-                
-                priceField.setText(rs.getString("UNITPRICE"));
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            try {
+                // TODO add your handling code here:
+                String itemCode = toUpperCase(itemCodeField.getText());
+                String sql = "SELECT * FROM ITEMTABLE WHERE ITEMCODE = '" + itemCode + "'";
+                Statement st = con.createStatement();
+                ResultSet rs = st.executeQuery(sql);
+
+                while (rs.next()) {
+
+                    itemNameField.setText(rs.getString("ITEMDESCRIPTION"));
+                    packsizeField.setText(rs.getString("PACKSIZE"));
+
+                    priceField.setText(rs.getString("UNITPRICE"));
+                }
+
+            } catch (SQLException ex) {
+                Logger.getLogger(ItemListFrame.class.getName()).log(Level.SEVERE, null, ex);
             }
-                  
-        } catch (SQLException ex) {
-            Logger.getLogger(ItemListFrame.class.getName()).log(Level.SEVERE, null, ex);
-        }
         }
     }//GEN-LAST:event_itemCodeFieldKeyPressed
 
     private void memberIDFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_memberIDFieldKeyPressed
         // TODO add your handling code here:
-         if(evt.getKeyCode()== KeyEvent.VK_ENTER){
-             try {
-            // TODO add your handling code here:
-            String memberID = toUpperCase(memberIDField.getText());
-            String sql = "SELECT * FROM MEMBERS WHERE MEMBERID = '" +memberID +"'";
-            Statement st = con.createStatement();
-            ResultSet rs = st.executeQuery(sql);
-          //  SimpleDateFormat formatter = null;
-         
-            while(rs.next())
-            {
-                
-                CustomerNameField.setText(rs.getString("MEMBERNAME"));
-                addressField.setText(rs.getString("ADDRESS"));
-                emailField.setText(rs.getString("EMAIL"));
-                phoneField.setText(rs.getString("PHONE"));
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            try {
+                // TODO add your handling code here:
+                String memberID = toUpperCase(memberIDField.getText());
+                String sql = "SELECT * FROM MEMBERS WHERE MEMBERID = '" + memberID + "'";
+                Statement st = con.createStatement();
+                ResultSet rs = st.executeQuery(sql);
+                //  SimpleDateFormat formatter = null;
+
+                while (rs.next()) {
+
+                    CustomerNameField.setText(rs.getString("MEMBERNAME"));
+                    addressField.setText(rs.getString("ADDRESS"));
+                    emailField.setText(rs.getString("EMAIL"));
+                    phoneField.setText(rs.getString("PHONE"));
+                }
+
+            } catch (SQLException ex) {
+                Logger.getLogger(ItemListFrame.class.getName()).log(Level.SEVERE, null, ex);
             }
-            
-        } catch (SQLException ex) {
-            Logger.getLogger(ItemListFrame.class.getName()).log(Level.SEVERE, null, ex);
-        }
         }
     }//GEN-LAST:event_memberIDFieldKeyPressed
 
     private void addCartButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addCartButtonActionPerformed
-      /*  // TODO add your handling code here:
-            int row = -1;
-        String memberID = toUpperCase(memberIDField.getText());
-        memberIDField.setText("");
-        String memberName = memberField.getText();
-        String address = addressField.getText();
-        Date date = Calendar.getInstance().getTime();  
-        DateFormat dateFormat = new SimpleDateFormat("yyyy-M-dd");   
-        String register2 = dateFormat.format(date);
-        
-        String mail = emailField.getText();
-        String phone = phoneField.getText();
-        memberField.setText("");
-        addressField.setText("");
-      
-        emailField.setText("");
-        phoneField.setText("");
-      //  System.out.println(register2);
+        int row = -1;
+        String itemCode = toUpperCase(itemCodeField.getText());
+        itemCodeField.setText("");
+        String packSize = packsizeField.getText();
+        String itemName = itemNameField.getText() + "  " + packSize;
+
+        String quantity = quantityField.getText();
+        int quantityint = Integer.parseInt(quantity);
+        String unitPrice = priceField.getText();
+        String totalPrice = totalPriceLabel.getText();
+        itemNameField.setText("");
+        packsizeField.setText("");
+        quantityField.setText("");
+        priceField.setText("");
+        totalPriceLabel.setText("0.00");
+        totalQuantity = totalQuantity + Integer.parseInt(quantity);
+
+        itemCountField.setText(Integer.toString(totalQuantity));
+
+        totalPriceInTotalSection = totalPriceInTotalSection + Double.parseDouble(totalPrice);
+        totalAmount.setText(Double.toString(totalPriceInTotalSection));
+
         try {
-            String sql = "INSERT INTO MEMBERS(MEMBERID,MEMBERNAME, ADDRESS,REGISTERDATE,EMAIL,PHONE) VALUES( ?,  ?,  ?,  ?, ?,?)";
+            String sql = "INSERT INTO PLACEORDER(ITEMCODE,ITEMNAME, ITEMPRICE,TOTALPRICE,QUANTITY) VALUES( ?,  ?,  ?,  ?, ?)";
             PreparedStatement ps = con.prepareStatement(sql);
-            ps.setString(1, memberID);
-            ps.setString(2, memberName);
-            ps.setString(3, address);
-            ps.setString(4, register2);
-            ps.setString(5, mail);
-            ps.setString(6, phone);
+            ps.setString(1, itemCode);
+            ps.setString(2, itemName);
+            ps.setString(3, unitPrice);
+            ps.setString(4, totalPrice);
+            ps.setString(5, quantity);
 
             row = ps.executeUpdate();
 
-            System.out.println("Data insertionsuccessful.Row:" + row + "Information");
+            System.out.println("Inserted successfully");
             //  JOptionPane.showMessageDialog(null, "Data insertionsuccessful.Row:" + row, "Information", JOptionPane.INFORMATION_MESSAGE);
 
         } catch (SQLException ex) {
@@ -769,10 +850,75 @@ public class PlaceOrderFrame extends javax.swing.JFrame {
 
         }
         showAll();
-        
-        */
-        
     }//GEN-LAST:event_addCartButtonActionPerformed
+
+    private void removeAllListedItemButtonActionPerformed() {
+         int row = -1;
+
+        totalQuantity = 0;
+
+        itemCountField.setText(Integer.toString(totalQuantity));
+
+        totalPriceInTotalSection = 0.00;
+        totalAmount.setText(Double.toString(totalPriceInTotalSection));
+
+        try {
+            // TODO add your handling code here:
+
+            String sql = "DELETE FROM PLACEORDER ";
+
+            Statement st = con.createStatement();
+
+            row = st.executeUpdate(sql);
+
+            System.out.println("deleted row : " + row);
+
+        } catch (SQLException ex) {
+            Logger.getLogger(PlaceOrderFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        showAll();
+    }
+
+
+    private void removeAllListedItemButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeAllListedItemButtonActionPerformed
+         int choose = JOptionPane.showConfirmDialog(null,
+                        "Do you really want to remove all item from cart ?",
+                        "Confirm Remove", JOptionPane.YES_NO_OPTION,
+                        JOptionPane.INFORMATION_MESSAGE);
+                if (choose == JOptionPane.YES_OPTION) {
+                    
+                    removeAllListedItemButtonActionPerformed();
+
+                } else {
+                    System.out.println("do nothing");
+                }
+    }//GEN-LAST:event_removeAllListedItemButtonActionPerformed
+
+    private void LogoutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LogoutButtonActionPerformed
+        // TODO add your handling code here:
+        new LoginPage().setVisible(true);
+        dispose();
+    }//GEN-LAST:event_LogoutButtonActionPerformed
+
+    private double calculateDiscountAndVat(double discount, double VAT) {
+
+        double totalParcentage = VAT - discount;
+
+        double parcentageValue = (totalParcentage * Double.parseDouble(totalAmount.getText()));
+
+        double ans = Double.parseDouble(totalAmount.getText()) + parcentageValue;
+
+        return ans;
+    }
+
+
+    private void discountFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_discountFieldKeyPressed
+        // TODO add your handling code here:
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            double calculateValue = calculateDiscountAndVat(Double.parseDouble(discountField.getText()), 15);
+            totalWithVAT.setText(Double.toString(calculateValue));
+        }
+    }//GEN-LAST:event_discountFieldKeyPressed
 
     /**
      * @param args the command line arguments
@@ -815,6 +961,7 @@ public class PlaceOrderFrame extends javax.swing.JFrame {
     private javax.swing.JTable PLACEORDERTABLE;
     private button.MyButton addCartButton;
     private textfield.TextField addressField;
+    private javax.swing.JLabel dateLabel;
     private javax.swing.JTextField discountField;
     private textfield.TextField emailField;
     private textfield.TextField itemCodeField;
@@ -824,9 +971,7 @@ public class PlaceOrderFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -848,18 +993,19 @@ public class PlaceOrderFrame extends javax.swing.JFrame {
     private javax.swing.JTable jTable1;
     private javax.swing.JToggleButton jToggleButton1;
     private textfield.TextField memberIDField;
-    private button.MyButton myButton1;
     private button.MyButton myButton10;
     private button.MyButton myButton4;
     private button.MyButton myButton5;
-    private button.MyButton myButton6;
     private button.MyButton myButton8;
     private button.MyButton myButton9;
     private textfield.TextField packsizeField;
     private textfield.TextField phoneField;
     private textfield.TextField priceField;
     private textfield.TextField quantityField;
+    private button.MyButton removeAllListedItemButton;
+    private button.MyButton searchItemButton;
     private button.MyButton searchMember;
+    private javax.swing.JLabel timeLabel;
     private javax.swing.JTextField totalAmount;
     private javax.swing.JLabel totalPriceLabel;
     private javax.swing.JTextField totalWithVAT;

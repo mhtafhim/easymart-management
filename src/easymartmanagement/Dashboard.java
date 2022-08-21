@@ -34,7 +34,7 @@ public class Dashboard extends javax.swing.JFrame {
         EasyMembersButton = new button.MyButton();
         ItemButton = new button.MyButton();
         LogoutButton = new button.MyButton();
-        ItemButton2 = new button.MyButton();
+        aboutButton = new button.MyButton();
         jPanel2 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
@@ -97,11 +97,11 @@ public class Dashboard extends javax.swing.JFrame {
             }
         });
 
-        ItemButton2.setText("About");
-        ItemButton2.setRadius(50);
-        ItemButton2.addActionListener(new java.awt.event.ActionListener() {
+        aboutButton.setText("About");
+        aboutButton.setRadius(50);
+        aboutButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ItemButton2ActionPerformed(evt);
+                aboutButtonActionPerformed(evt);
             }
         });
 
@@ -113,7 +113,7 @@ public class Dashboard extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(20, 20, 20)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(ItemButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(aboutButton, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(LogoutButton, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(AllReportButton, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(gotoCashierButton, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -134,7 +134,7 @@ public class Dashboard extends javax.swing.JFrame {
                 .addGap(28, 28, 28)
                 .addComponent(ItemButton, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(27, 27, 27)
-                .addComponent(ItemButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(aboutButton, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(LogoutButton, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(80, Short.MAX_VALUE))
@@ -302,19 +302,23 @@ public class Dashboard extends javax.swing.JFrame {
 
     private void EasyMembersButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EasyMembersButtonActionPerformed
         // TODO add your handling code here:
+        new MembersFrame().setVisible(true);
     }//GEN-LAST:event_EasyMembersButtonActionPerformed
 
     private void ItemButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ItemButtonActionPerformed
         // TODO add your handling code here:
+        new ItemListFrame().setVisible(true);
+        
     }//GEN-LAST:event_ItemButtonActionPerformed
 
     private void LogoutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LogoutButtonActionPerformed
         // TODO add your handling code here:
+        new LoginPage().setVisible(true);
     }//GEN-LAST:event_LogoutButtonActionPerformed
 
-    private void ItemButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ItemButton2ActionPerformed
+    private void aboutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aboutButtonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_ItemButton2ActionPerformed
+    }//GEN-LAST:event_aboutButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -355,8 +359,8 @@ public class Dashboard extends javax.swing.JFrame {
     private button.MyButton AllReportButton;
     private button.MyButton EasyMembersButton;
     private button.MyButton ItemButton;
-    private button.MyButton ItemButton2;
     private button.MyButton LogoutButton;
+    private button.MyButton aboutButton;
     private button.MyButton gotoCashierButton;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

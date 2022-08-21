@@ -52,7 +52,6 @@ public class LoginPage extends javax.swing.JFrame {
         LoginButton = new javax.swing.JButton();
         LoginClear = new javax.swing.JButton();
         LoginExit = new javax.swing.JButton();
-        signUpButton = new javax.swing.JButton();
         txtloginEmail = new textfield.TextField();
         txtLoginPassword = new textfield.PasswordField();
         jPanel1 = new javax.swing.JPanel();
@@ -88,15 +87,6 @@ public class LoginPage extends javax.swing.JFrame {
             }
         });
         getContentPane().add(LoginExit, new org.netbeans.lib.awtextra.AbsoluteConstraints(352, 497, 120, 44));
-
-        signUpButton.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        signUpButton.setText("Sign up");
-        signUpButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                signUpButtonActionPerformed(evt);
-            }
-        });
-        getContentPane().add(signUpButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(352, 439, 120, 40));
 
         txtloginEmail.setBackground(new java.awt.Color(0, 153, 153));
         txtloginEmail.setLabelText("Email");
@@ -166,12 +156,6 @@ public class LoginPage extends javax.swing.JFrame {
 
     }//GEN-LAST:event_LoginButtonActionPerformed
 
-    private void signUpButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_signUpButtonActionPerformed
-        // TODO add your handling code here:
-        new RegisterPage().setVisible(true);
-        dispose();
-    }//GEN-LAST:event_signUpButtonActionPerformed
-
     private void LoginExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoginExitActionPerformed
         // TODO add your handling code here:
         dispose();
@@ -218,7 +202,6 @@ public class LoginPage extends javax.swing.JFrame {
     private javax.swing.JButton LoginExit;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JButton signUpButton;
     private textfield.PasswordField txtLoginPassword;
     private textfield.TextField txtloginEmail;
     // End of variables declaration//GEN-END:variables

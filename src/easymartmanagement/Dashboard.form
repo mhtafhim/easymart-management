@@ -44,7 +44,7 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="ItemButton2" min="-2" pref="194" max="-2" attributes="0"/>
+                      <Component id="aboutButton" min="-2" pref="194" max="-2" attributes="0"/>
                       <Component id="LogoutButton" min="-2" pref="194" max="-2" attributes="0"/>
                       <Component id="AllReportButton" min="-2" pref="194" max="-2" attributes="0"/>
                       <Component id="gotoCashierButton" min="-2" pref="194" max="-2" attributes="0"/>
@@ -68,7 +68,7 @@
                   <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
                   <Component id="ItemButton" min="-2" pref="51" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
-                  <Component id="ItemButton2" min="-2" pref="51" max="-2" attributes="0"/>
+                  <Component id="aboutButton" min="-2" pref="51" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="LogoutButton" min="-2" pref="51" max="-2" attributes="0"/>
                   <EmptySpace pref="80" max="32767" attributes="0"/>
@@ -131,13 +131,13 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="LogoutButtonActionPerformed"/>
           </Events>
         </Component>
-        <Component class="button.MyButton" name="ItemButton2">
+        <Component class="button.MyButton" name="aboutButton">
           <Properties>
             <Property name="text" type="java.lang.String" value="About"/>
             <Property name="radius" type="int" value="50"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ItemButton2ActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="aboutButtonActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>
