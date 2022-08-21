@@ -39,8 +39,8 @@ public class PlaceOrderFrame extends javax.swing.JFrame {
      */
     int totalQuantity = 0;
     double totalPriceInTotalSection = 0;
-    double discount;
-    double totalWithVATAmount;
+    double discount = 0;
+    double totalWithVATAmount =0 ;
 
     Connection con;
 
@@ -857,6 +857,8 @@ public class PlaceOrderFrame extends javax.swing.JFrame {
                     "Error", JOptionPane.INFORMATION_MESSAGE);
 
         }
+        double calculateValue = calculateDiscountAndVat(0, 15);
+        totalWithVAT.setText(Double.toString(calculateValue));
         showAll();
     }//GEN-LAST:event_addCartButtonActionPerformed
 
@@ -918,6 +920,7 @@ public class PlaceOrderFrame extends javax.swing.JFrame {
 
         return ans;
     }
+    
 
 
     private void discountFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_discountFieldKeyPressed
