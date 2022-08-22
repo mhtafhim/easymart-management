@@ -181,8 +181,8 @@
                           <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
                           <Component id="myButton4" min="-2" pref="88" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
-                          <Component id="PlaceOrderButton" min="-2" pref="88" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="55" max="-2" attributes="0"/>
+                          <Component id="PlaceOrderButton" min="-2" pref="103" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
                       </Group>
                   </Group>
               </Group>

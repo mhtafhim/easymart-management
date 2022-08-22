@@ -76,6 +76,36 @@ public class PlaceOrderFrame extends javax.swing.JFrame {
         
         times(); // time
         
+        
+        OrderIDSet();
+        
+       
+       
+    }
+    
+    private void OrderIDSet(){
+        try {
+            String sql = "SELECT MAX(ORDERID) FROM ALLREPORTTABLE";
+            Statement st = con.createStatement();
+            ResultSet rs = st.executeQuery(sql);
+            //  SimpleDateFormat formatter = null;
+            String orderIDinString = null;
+            while (rs.next()) {
+
+                orderIDinString = rs.getString(1);
+                
+            }
+              
+            int orderID = Integer.parseInt(orderIDinString)+1;
+            
+            
+             orderIDLabel.setText("000" + Integer.toString(orderID));
+        
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(PlaceOrderFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    
     }
 
     public void dt() {
@@ -672,8 +702,8 @@ public class PlaceOrderFrame extends javax.swing.JFrame {
                         .addGap(50, 50, 50)
                         .addComponent(myButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(37, 37, 37)
-                        .addComponent(PlaceOrderButton, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(55, 55, 55))))
+                        .addComponent(PlaceOrderButton, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(40, 40, 40))))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -840,6 +870,8 @@ public class PlaceOrderFrame extends javax.swing.JFrame {
         
         double calculateValue = calculateDiscountAndVat(0, 15);
         totalWithVAT.setText(Double.toString(calculateValue));
+        
+      
 
         try {
             String sql = "INSERT INTO PLACEORDER(ITEMCODE,ITEMNAME, ITEMPRICE,TOTALPRICE,QUANTITY) VALUES( ?,  ?,  ?,  ?, ?)";
@@ -884,6 +916,19 @@ public class PlaceOrderFrame extends javax.swing.JFrame {
             row = st.executeUpdate(sql);
 
             System.out.println("deleted row : " + row);
+            
+            CustomerNameField.setText("");
+            emailField.setText("");
+            addressField.setText("");
+            phoneField.setText("");
+            memberIDField.setText("");
+            itemCodeField.setText("");
+            itemNameField.setText("");
+            itemCountField.setText("");
+            priceField.setText("");
+            packsizeField.setText("");
+            totalPriceLabel.setText("");
+            quantityField.setText("");
 
         } catch (SQLException ex) {
             Logger.getLogger(PlaceOrderFrame.class.getName()).log(Level.SEVERE, null, ex);
@@ -964,8 +1009,12 @@ public class PlaceOrderFrame extends javax.swing.JFrame {
         String itemName = concateTheWholeItemDescription();
 
         String totalItem = itemCountField.getText();
-        String totalPrice = totalPriceLabel.getText();
+        String totalPrice = totalWithVAT.getText();
         String cashierName = cashierNameLabel.getText();
+        
+        String name = CustomerNameField.getText();
+        String address = addressField.getText();
+        String email = emailField.getText();
      /*   
         SimpleDateFormat orderdateformat = new SimpleDateFormat("yyyy-M-dd");
         
@@ -989,7 +1038,7 @@ public class PlaceOrderFrame extends javax.swing.JFrame {
         totalAmount.setText(Double.toString(totalPriceInTotalSection));
 */
         try {
-            String sql = "INSERT INTO ALLREPORTTABLE(ORDERID,CUSTOMERNUMBER, ITEMDESCRIPTIONS,TOTALITEM,TOTALPRICE,CASHIER,ORDERDATE,ORDERTIME) VALUES( ?,  ?,  ?,  ?, ?,?,CURRENT_DATE,CURRENT_TIME)";
+            String sql = "INSERT INTO ALLREPORTTABLE(ORDERID,CUSTOMERNUMBER, ITEMDESCRIPTIONS,TOTALITEM,TOTALPRICE,CASHIER,ORDERDATE,ORDERTIME,CUSTOMERNAME,CUSTOMERADDRESS,CUSTOMEREMAIL) VALUES( ?,  ?,  ?,  ?, ?,?,CURRENT_DATE,CURRENT_TIME,?,?,?)";
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setString(1, orderID);
             ps.setString(2, phone);
@@ -997,12 +1046,17 @@ public class PlaceOrderFrame extends javax.swing.JFrame {
             ps.setString(4, totalItem);
             ps.setString(5, totalPrice);
             ps.setString(6, cashierName);
+            ps.setString(7, name);
+            ps.setString(8, address);
+            ps.setString(9, email);
         //    ps.setString(7, OrderDate);
          //   ps.setString(8, orderTime);
 
             row = ps.executeUpdate();
 
             System.out.println("Inserted successfully into all report database");
+            
+            OrderIDSet();
             
           //  JOptionPane.showMessageDialog(null, "Order Successfully Placed", JOptionPane.INFORMATION_MESSAGE);
             
