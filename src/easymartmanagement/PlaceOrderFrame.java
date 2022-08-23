@@ -43,8 +43,50 @@ public class PlaceOrderFrame extends javax.swing.JFrame {
     double totalWithVATAmount =0 ;
 
     Connection con;
+    
+    public PlaceOrderFrame(){
+          initComponents();
+        try {
+            con = DriverManager.getConnection("jdbc:derby://localhost:1527/easymart");
+            if (con != null) {
+                System.out.println("connection establised");
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage(), "Error in connection", JOptionPane.INFORMATION_MESSAGE);
+        }
 
-    public PlaceOrderFrame() {
+        this.addWindowListener(new WindowAdapter() {
+            public void windowClosing(WindowEvent e) {
+                int choose = JOptionPane.showConfirmDialog(null,
+                        "Do you really want to exit the application ?",
+                        "Confirm Close", JOptionPane.YES_NO_OPTION,
+                        JOptionPane.INFORMATION_MESSAGE);
+                if (choose == JOptionPane.YES_OPTION) {
+                    e.getWindow().dispose();
+                    System.out.println("close");
+                    removeAllListedItemButtonActionPerformed();
+
+                } else {
+                    System.out.println("do nothing");
+                }
+            }
+        });
+
+         dt(); // daet
+        
+        times(); // time
+        
+        
+        OrderIDSet();
+        
+       cashierNameLabel.setText("Please Log in for cashier Name.");
+       
+        
+    }
+    
+    
+
+    public PlaceOrderFrame(String cashier) {
         initComponents();
         try {
             con = DriverManager.getConnection("jdbc:derby://localhost:1527/easymart");
@@ -79,7 +121,7 @@ public class PlaceOrderFrame extends javax.swing.JFrame {
         
         OrderIDSet();
         
-       
+       cashierNameLabel.setText(cashier);
        
     }
     

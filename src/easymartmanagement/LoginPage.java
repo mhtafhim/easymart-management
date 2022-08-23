@@ -126,11 +126,13 @@ public class LoginPage extends javax.swing.JFrame {
             ResultSet rs = st.executeQuery(sql);
             String pass = null;
             String role = null;
+            String name = null;
             while(rs.next())
             {
 
                 pass = rs.getString("PASSWORD");
                 role = rs.getString("ROLE");
+                name = rs.getString("NAME");
                 
 
             }
@@ -141,7 +143,7 @@ public class LoginPage extends javax.swing.JFrame {
                 dispose();
                // JOptionPane.showMessageDialog(null, "Login successfull" , "Information", JOptionPane.INFORMATION_MESSAGE);
             }else if(password.equals(pass) && role.equals("cashier")){
-                new PlaceOrderFrame().setVisible(true);
+                new PlaceOrderFrame(name).setVisible(true);
                 dispose();
             }
             else
