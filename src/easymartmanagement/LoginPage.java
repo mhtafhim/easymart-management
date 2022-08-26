@@ -5,6 +5,7 @@
  */
 package easymartmanagement;
 
+import com.sun.glass.events.KeyEvent;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -36,7 +37,7 @@ public class LoginPage extends javax.swing.JFrame {
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, ex.getMessage(), "Error in connection", JOptionPane.INFORMATION_MESSAGE);
         }
-       
+
     }
 
     /**
@@ -76,6 +77,11 @@ public class LoginPage extends javax.swing.JFrame {
         LoginClear.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         LoginClear.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/clear.png"))); // NOI18N
         LoginClear.setText("Clear");
+        LoginClear.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                LoginClearActionPerformed(evt);
+            }
+        });
         getContentPane().add(LoginClear, new org.netbeans.lib.awtextra.AbsoluteConstraints(445, 325, 125, 44));
 
         LoginExit.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -94,6 +100,11 @@ public class LoginPage extends javax.swing.JFrame {
 
         txtLoginPassword.setBackground(new java.awt.Color(0, 153, 153));
         txtLoginPassword.setLabelText("Password");
+        txtLoginPassword.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtLoginPasswordKeyPressed(evt);
+            }
+        });
         getContentPane().add(txtLoginPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(208, 242, 362, 67));
 
         jPanel1.setBackground(new java.awt.Color(0, 153, 153));
@@ -115,46 +126,48 @@ public class LoginPage extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void LoginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoginButtonActionPerformed
-        // TODO add your handling code here:
+    private void loginSystem() {
         try {
             // TODO add your handling code here:
             String email = toLowerCase(txtloginEmail.getText());
             String password = txtLoginPassword.getText();
-            String sql = "SELECT * FROM LOGINDATA WHERE EMAIL = '" +email +"'";
+            String sql = "SELECT * FROM LOGINDATA WHERE EMAIL = '" + email + "' OR USERNAME = '"+ email + "'";
             Statement st = con.createStatement();
             ResultSet rs = st.executeQuery(sql);
             String pass = null;
             String role = null;
             String name = null;
-            while(rs.next())
-            {
+            //String userName = null;
+            while (rs.next()) {
 
                 pass = rs.getString("PASSWORD");
                 role = rs.getString("ROLE");
                 name = rs.getString("NAME");
-                
+        //        userName = rs.getString("USERNAME");
 
             }
             System.out.println("button working");
-            if(password.equals(pass) && role.equals("admin"))
-            {
+            if (password.equals(pass) && role.equals("admin") ) {
                 new Dashboard().setVisible(true);
                 dispose();
-               // JOptionPane.showMessageDialog(null, "Login successfull" , "Information", JOptionPane.INFORMATION_MESSAGE);
-            }else if(password.equals(pass) && role.equals("cashier")){
+                // JOptionPane.showMessageDialog(null, "Login successfull" , "Information", JOptionPane.INFORMATION_MESSAGE);
+            } else if (password.equals(pass) && role.equals("cashier")) {
                 new PlaceOrderFrame(name).setVisible(true);
                 dispose();
-            }
-            else
-            {
-                JOptionPane.showMessageDialog(null, "incorrect email/password" , "Information", JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(null, "incorrect email/password", "Information", JOptionPane.INFORMATION_MESSAGE);
             }
 
         } catch (SQLException ex) {
-          //  JOptionPane.showMessageDialog(null, "Login successfull" , "Information", JOptionPane.INFORMATION_MESSAGE);
+            //  JOptionPane.showMessageDialog(null, "Login successfull" , "Information", JOptionPane.INFORMATION_MESSAGE);
             Logger.getLogger(ItemListFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+
+    private void LoginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoginButtonActionPerformed
+        // TODO add your handling code here:
+        loginSystem();
 
     }//GEN-LAST:event_LoginButtonActionPerformed
 
@@ -162,6 +175,20 @@ public class LoginPage extends javax.swing.JFrame {
         // TODO add your handling code here:
         dispose();
     }//GEN-LAST:event_LoginExitActionPerformed
+
+    private void LoginClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoginClearActionPerformed
+        // TODO add your handling code here:
+        txtloginEmail.setText("");
+        txtLoginPassword.setText("");
+    }//GEN-LAST:event_LoginClearActionPerformed
+
+    private void txtLoginPasswordKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtLoginPasswordKeyPressed
+        // TODO add your handling code here:
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            loginSystem();
+        }
+
+    }//GEN-LAST:event_txtLoginPasswordKeyPressed
 
     /**
      * @param args the command line arguments

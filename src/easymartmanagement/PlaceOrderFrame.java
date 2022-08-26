@@ -131,16 +131,16 @@ public class PlaceOrderFrame extends javax.swing.JFrame {
             Statement st = con.createStatement();
             ResultSet rs = st.executeQuery(sql);
             //  SimpleDateFormat formatter = null;
-            String orderIDinString = null;
+            int orderID = 0;
             while (rs.next()) {
 
-                orderIDinString = rs.getString(1);
+                orderID = rs.getInt(1);
                 
             }
               
-            int orderID = Integer.parseInt(orderIDinString)+1;
+            orderID++;
             
-            
+            System.out.println(orderID);
              orderIDLabel.setText("000" + Integer.toString(orderID));
         
             
@@ -417,7 +417,7 @@ public class PlaceOrderFrame extends javax.swing.JFrame {
         });
 
         priceField.setBackground(new java.awt.Color(153, 255, 204));
-        priceField.setLabelText("Price");
+        priceField.setLabelText("Price(tk.)");
 
         searchItemButton.setText("Search");
         searchItemButton.setBorderColor(new java.awt.Color(204, 204, 204));
@@ -440,7 +440,7 @@ public class PlaceOrderFrame extends javax.swing.JFrame {
         packsizeField.setBackground(new java.awt.Color(153, 255, 204));
         packsizeField.setLabelText("Pack Size");
 
-        jLabel16.setText("Total Price : ");
+        jLabel16.setText("Total Price(tk.) : ");
 
         totalPriceLabel.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         totalPriceLabel.setText("0.00");
@@ -455,8 +455,8 @@ public class PlaceOrderFrame extends javax.swing.JFrame {
                     .addComponent(itemNameField, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(itemCodeField, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(quantityField, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(totalPriceLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 152, Short.MAX_VALUE)
-                    .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(totalPriceLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
@@ -811,24 +811,28 @@ public class PlaceOrderFrame extends javax.swing.JFrame {
 
     private void searchItemButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchItemButtonActionPerformed
         // TODO add your handling code here:
-        try {
-            // TODO add your handling code here:
-            String itemCode = toUpperCase(itemCodeField.getText());
-            String sql = "SELECT * FROM ITEMTABLE WHERE ITEMCODE = '" + itemCode + "'";
-            Statement st = con.createStatement();
-            ResultSet rs = st.executeQuery(sql);
+       try {
+                // TODO add your handling code here:
+                String itemCode = toUpperCase(itemCodeField.getText());
+                String sql = "SELECT * FROM ITEMTABLE WHERE ITEMCODE = '" + itemCode + "'";
+                Statement st = con.createStatement();
+                ResultSet rs = st.executeQuery(sql);
+                String UnitPrice = null;
+                while (rs.next()) {
 
-            while (rs.next()) {
+                    itemNameField.setText(rs.getString("ITEMDESCRIPTION"));
+                    packsizeField.setText(rs.getString("PACKSIZE"));
+                    UnitPrice = rs.getString("UNITPRICE");
+                   
+                    
+                }
+                 quantityField.setText("1");
+                 priceField.setText(UnitPrice);
+                 totalPriceLabel.setText(UnitPrice);
 
-                itemNameField.setText(rs.getString("ITEMDESCRIPTION"));
-                packsizeField.setText(rs.getString("PACKSIZE"));
-
-                priceField.setText(rs.getString("UNITPRICE"));
+            } catch (SQLException ex) {
+                Logger.getLogger(ItemListFrame.class.getName()).log(Level.SEVERE, null, ex);
             }
-
-        } catch (SQLException ex) {
-            Logger.getLogger(ItemListFrame.class.getName()).log(Level.SEVERE, null, ex);
-        }
     }//GEN-LAST:event_searchItemButtonActionPerformed
 
     private void quantityFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_quantityFieldKeyPressed
@@ -847,14 +851,18 @@ public class PlaceOrderFrame extends javax.swing.JFrame {
                 String sql = "SELECT * FROM ITEMTABLE WHERE ITEMCODE = '" + itemCode + "'";
                 Statement st = con.createStatement();
                 ResultSet rs = st.executeQuery(sql);
-
+                String UnitPrice = null;
                 while (rs.next()) {
 
                     itemNameField.setText(rs.getString("ITEMDESCRIPTION"));
                     packsizeField.setText(rs.getString("PACKSIZE"));
-
-                    priceField.setText(rs.getString("UNITPRICE"));
+                    UnitPrice = rs.getString("UNITPRICE");
+                   
+                    
                 }
+                 quantityField.setText("1");
+                 priceField.setText(UnitPrice);
+                 totalPriceLabel.setText(UnitPrice);
 
             } catch (SQLException ex) {
                 Logger.getLogger(ItemListFrame.class.getName()).log(Level.SEVERE, null, ex);
@@ -887,8 +895,9 @@ public class PlaceOrderFrame extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_memberIDFieldKeyPressed
 
-    private void addCartButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addCartButtonActionPerformed
-        int row = -1;
+    private void addItemInCartIfitsNotInCart()
+    {
+          int row = -1;
         String itemCode = toUpperCase(itemCodeField.getText());
         itemCodeField.setText("");
         String packSize = packsizeField.getText();
@@ -921,7 +930,7 @@ public class PlaceOrderFrame extends javax.swing.JFrame {
             ps.setString(1, itemCode);
             ps.setString(2, itemName);
             ps.setString(3, unitPrice);
-            ps.setString(4, totalWithVAT.getText());
+            ps.setString(4, totalPrice);
             ps.setString(5, quantity);
 
             row = ps.executeUpdate();
@@ -936,6 +945,36 @@ public class PlaceOrderFrame extends javax.swing.JFrame {
         }
         
         showAll();
+    }
+    
+    private void UpdateItemInCartIfitsInCart(){
+         try {
+            // TODO add your handling code here:
+            String itemCode = toUpperCase(itemCodeField.getText());
+            String sql = "SELECT * FROM PLACEORDER WHERE ITEMCODE = '" +itemCode +"'";
+            Statement st = con.createStatement();
+            ResultSet rs = st.executeQuery(sql);
+            
+            while(rs.next())
+            {
+                
+                itemNameField.setText(rs.getString("ITEMNAME"));
+            //    packsizeField.setText(rs.getString("PACKSIZE"));
+                quantityField.setText(rs.getString("QUANTITY"));
+                priceField.setText(rs.getString("ITEMPRICE"));
+                totalPriceLabel.setText(rs.getString("TOTALPRICE"));
+            }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(ItemListFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    
+    private void addCartButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addCartButtonActionPerformed
+            
+        addItemInCartIfitsNotInCart();
+        
     }//GEN-LAST:event_addCartButtonActionPerformed
 
     private void removeAllListedItemButtonActionPerformed() {
@@ -995,8 +1034,18 @@ public class PlaceOrderFrame extends javax.swing.JFrame {
 
     private void LogoutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LogoutButtonActionPerformed
         // TODO add your handling code here:
-        new LoginPage().setVisible(true);
-        dispose();
+        int choose = JOptionPane.showConfirmDialog(null,
+                "Do you really want to Logging out ?",
+                "Confirm Close", JOptionPane.YES_NO_OPTION,
+                JOptionPane.INFORMATION_MESSAGE);
+        if (choose == JOptionPane.YES_OPTION) {
+            new LoginPage().setVisible(true);
+            dispose();
+            System.out.println("close");
+
+        } else {
+            System.out.println("do nothing");
+        }
     }//GEN-LAST:event_LogoutButtonActionPerformed
 
     private double calculateDiscountAndVat(double discount, double VAT) {
@@ -1044,7 +1093,9 @@ public class PlaceOrderFrame extends javax.swing.JFrame {
     {
         
         int row = -1;
-        String orderID = orderIDLabel.getText();
+        String tempOderID = orderIDLabel.getText();
+        int orderID = Integer.parseInt(tempOderID);
+        
         String phone = phoneField.getText();
     //    String packSize = packsizeField.getText();
     //    String quantity = quantityField.getText();
@@ -1082,7 +1133,7 @@ public class PlaceOrderFrame extends javax.swing.JFrame {
         try {
             String sql = "INSERT INTO ALLREPORTTABLE(ORDERID,CUSTOMERNUMBER, ITEMDESCRIPTIONS,TOTALITEM,TOTALPRICE,CASHIER,ORDERDATE,ORDERTIME,CUSTOMERNAME,CUSTOMERADDRESS,CUSTOMEREMAIL) VALUES( ?,  ?,  ?,  ?, ?,?,CURRENT_DATE,CURRENT_TIME,?,?,?)";
             PreparedStatement ps = con.prepareStatement(sql);
-            ps.setString(1, orderID);
+            ps.setInt(1, orderID);
             ps.setString(2, phone);
             ps.setString(3, itemName);
             ps.setString(4, totalItem);

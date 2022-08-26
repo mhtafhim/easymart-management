@@ -76,25 +76,23 @@ public class Dashboard extends javax.swing.JFrame {
 
             while (rs.next()) {
                 totalOrder++;
-                
-                totalSales = totalSales + Double.parseDouble(rs.getString("TOTALPRICE"));
+
                 soldItems = soldItems + Integer.parseInt(rs.getString("TOTALITEM"));
-                
-                
+                totalSales = totalSales + Double.parseDouble(rs.getString("TOTALPRICE"));
+
                 String tempPhoneNumber = rs.getString("CUSTOMERNUMBER");
-                
+
                 if (!(customerPhone.contains(tempPhoneNumber))) {
                     customerPhone.add(tempPhoneNumber);
                 }
-                
-                
+
                 String customerNumber = Integer.toString(customerPhone.size());
-                
+
                 totalSalesLabel.setText(Double.toString(totalSales));
                 soldItemsLabel.setText(Integer.toString(soldItems));
                 totalCustomerLabel.setText(customerNumber);
                 totalOrderLabel.setText(Integer.toString(totalOrder));
-                
+
                 System.out.println(totalSales);
                 System.out.println(soldItems);
                 System.out.println(totalOrder);
@@ -425,7 +423,7 @@ public class Dashboard extends javax.swing.JFrame {
 
     private void gotoCashierButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gotoCashierButtonActionPerformed
         // TODO add your handling code here:
-        new CashierList().setVisible(true);
+        new CashiersList().setVisible(true);
     }//GEN-LAST:event_gotoCashierButtonActionPerformed
 
     private void AllReportButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AllReportButtonActionPerformed
@@ -446,8 +444,20 @@ public class Dashboard extends javax.swing.JFrame {
 
     private void LogoutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LogoutButtonActionPerformed
         // TODO add your handling code here:
-        new LoginPage().setVisible(true);
-        dispose();
+        int choose = JOptionPane.showConfirmDialog(null,
+                "Do you really want to Logging out ?",
+                "Confirm Close", JOptionPane.YES_NO_OPTION,
+                JOptionPane.INFORMATION_MESSAGE);
+        if (choose == JOptionPane.YES_OPTION) {
+            new LoginPage().setVisible(true);
+            dispose();
+            System.out.println("close");
+
+        } else {
+            System.out.println("do nothing");
+        }
+
+
     }//GEN-LAST:event_LogoutButtonActionPerformed
 
     private void adminButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_adminButtonActionPerformed

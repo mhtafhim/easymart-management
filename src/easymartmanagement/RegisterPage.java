@@ -8,7 +8,11 @@ package easymartmanagement;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import static jdk.nashorn.internal.objects.NativeString.toLowerCase;
 import static jdk.nashorn.internal.objects.NativeString.toUpperCase;
@@ -22,7 +26,8 @@ public class RegisterPage extends javax.swing.JFrame {
     /**
      * Creates new form RegisterPage
      */
-     Connection con;
+    Connection con;
+    int mode = 0;
 
     public RegisterPage() {
         initComponents();
@@ -34,7 +39,62 @@ public class RegisterPage extends javax.swing.JFrame {
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, ex.getMessage(), "Error in connection", JOptionPane.INFORMATION_MESSAGE);
         }
-       
+        mode = 0;
+
+    }
+
+    public RegisterPage(int x) {
+        initComponents();
+        try {
+            con = DriverManager.getConnection("jdbc:derby://localhost:1527/easymart");
+            if (con != null) {
+                System.out.println("connection establised");
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage(), "Error in connection", JOptionPane.INFORMATION_MESSAGE);
+        }
+
+        CashierRegiLabel.setText("Register for Admin");
+        //     RegisterButton.setText("Update");
+        mode = 2;
+        //  updateCashierData(email);
+
+    }
+    
+    
+      public RegisterPage(String email,int temp) {
+        initComponents();
+        try {
+            con = DriverManager.getConnection("jdbc:derby://localhost:1527/easymart");
+            if (con != null) {
+                System.out.println("connection establised");
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage(), "Error in connection", JOptionPane.INFORMATION_MESSAGE);
+        }
+
+        CashierRegiLabel.setText("Update Info of Admin");
+        RegisterButton.setText("Update");
+        mode = 1;
+        updateCashierData(email);
+    }
+      
+
+    public RegisterPage(String email) {
+        initComponents();
+        try {
+            con = DriverManager.getConnection("jdbc:derby://localhost:1527/easymart");
+            if (con != null) {
+                System.out.println("connection establised");
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage(), "Error in connection", JOptionPane.INFORMATION_MESSAGE);
+        }
+
+        CashierRegiLabel.setText("Update Info of Cashier");
+        RegisterButton.setText("Update");
+        mode = 1;
+        updateCashierData(email);
     }
 
     /**
@@ -46,22 +106,23 @@ public class RegisterPage extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
+        CashierRegiLabel = new javax.swing.JLabel();
         RegisterButton = new javax.swing.JButton();
         ClearButton = new javax.swing.JButton();
         exitButton = new javax.swing.JButton();
-        LoginButton = new javax.swing.JButton();
-        txtName = new textfield.TextField();
+        txtUserName = new textfield.TextField();
         txtEmail = new textfield.TextField();
         txtMobile = new textfield.TextField();
         txtAddress = new textfield.TextField();
         txtPassword = new textfield.TextField();
+        txtName1 = new textfield.TextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(153, 0, 0));
-        jLabel1.setText("Register for cashier");
+        CashierRegiLabel.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
+        CashierRegiLabel.setForeground(new java.awt.Color(153, 0, 0));
+        CashierRegiLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        CashierRegiLabel.setText("Register for cashier");
 
         RegisterButton.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         RegisterButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/save.png"))); // NOI18N
@@ -78,24 +139,15 @@ public class RegisterPage extends javax.swing.JFrame {
 
         exitButton.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         exitButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/exit small.png"))); // NOI18N
-        exitButton.setText("Exit");
+        exitButton.setText("Close");
         exitButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 exitButtonActionPerformed(evt);
             }
         });
 
-        LoginButton.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        LoginButton.setForeground(new java.awt.Color(255, 0, 0));
-        LoginButton.setText("Login");
-        LoginButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                LoginButtonActionPerformed(evt);
-            }
-        });
-
-        txtName.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
-        txtName.setLabelText("Name");
+        txtUserName.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+        txtUserName.setLabelText("Username");
 
         txtEmail.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         txtEmail.setLabelText("Email");
@@ -109,105 +161,203 @@ public class RegisterPage extends javax.swing.JFrame {
         txtPassword.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         txtPassword.setLabelText("Password");
 
+        txtName1.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+        txtName1.setLabelText("Name");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, 531, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 531, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtMobile, javax.swing.GroupLayout.PREFERRED_SIZE, 531, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtAddress, javax.swing.GroupLayout.PREFERRED_SIZE, 531, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(CashierRegiLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 531, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(layout.createSequentialGroup()
-                            .addGap(285, 285, 285)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(306, 306, 306)
+                            .addGap(272, 272, 272)
                             .addComponent(RegisterButton)
-                            .addGap(17, 17, 17)
-                            .addComponent(ClearButton)
-                            .addGap(19, 19, 19)
-                            .addComponent(LoginButton, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGap(139, 139, 139)
+                            .addComponent(ClearButton))
                         .addGroup(layout.createSequentialGroup()
-                            .addGap(416, 416, 416)
+                            .addGap(369, 369, 369)
                             .addComponent(exitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(layout.createSequentialGroup()
                             .addGap(174, 174, 174)
-                            .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 531, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(txtUserName, javax.swing.GroupLayout.PREFERRED_SIZE, 531, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 531, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtMobile, javax.swing.GroupLayout.PREFERRED_SIZE, 531, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtAddress, javax.swing.GroupLayout.PREFERRED_SIZE, 531, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 531, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtName1, javax.swing.GroupLayout.PREFERRED_SIZE, 531, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap(204, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(54, 54, 54)
-                .addComponent(jLabel1)
-                .addGap(13, 13, 13)
-                .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(11, 11, 11)
-                .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap()
+                .addComponent(CashierRegiLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
+                .addComponent(txtName1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtUserName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(txtMobile, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(12, 12, 12)
+                .addGap(18, 18, 18)
                 .addComponent(txtAddress, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(28, 28, 28)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(30, 30, 30)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(RegisterButton)
-                    .addComponent(ClearButton)
-                    .addComponent(LoginButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(40, 40, 40)
+                    .addComponent(ClearButton))
+                .addGap(45, 45, 45)
                 .addComponent(exitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(77, Short.MAX_VALUE))
+                .addGap(32, 32, 32))
         );
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void RegisterButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RegisterButtonActionPerformed
-        // TODO add your handling code here:
-          int row = -1;
-        String name = toUpperCase(txtName.getText());
-        txtName.setText("");
+    private void updateCashierData(String mail) {
+        try {
+            // TODO add your handling code here:
+            mail = toLowerCase(mail);
+            String sql = "SELECT * FROM LOGINDATA WHERE EMAIL = '" + mail + "' OR USERNAME = '" + mail + "'";
+            Statement st = con.createStatement();
+            ResultSet rs = st.executeQuery(sql);
+
+            while (rs.next()) {
+
+                txtName1.setText(rs.getString("NAME"));
+                txtUserName.setText(rs.getString("USERNAME"));
+                txtEmail.setText(rs.getString("EMAIL"));
+                txtAddress.setText(rs.getString("ADDRESS"));
+                txtPassword.setText(rs.getString("PASSWORD"));
+                txtMobile.setText(rs.getString("MOBILE"));
+            }
+            txtEmail.setEditable(false);
+
+        } catch (SQLException ex) {
+            Logger.getLogger(ItemListFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    private void registrationProcess() {
+        int row = -1;
+        String name = txtName1.getText();
+        txtName1.setText("");
         String address = txtAddress.getText();
-        String email =toLowerCase(txtEmail.getText());
+        String email = toLowerCase(txtEmail.getText());
         String mobile = txtMobile.getText();
         String password = txtPassword.getText();
+        String username = toLowerCase(txtUserName.getText());
         txtEmail.setText("");
         txtMobile.setText("");
         txtPassword.setText("");
         try {
-            String sql = "INSERT INTO LOGINDATA(NAME,EMAIL, MOBILE,ADDRESS,PASSWORD,ROLE) VALUES( ?,  ?,  ?,  ?, ?,?)";
+            String sql = "INSERT INTO LOGINDATA(NAME,EMAIL, MOBILE,ADDRESS,PASSWORD,ROLE,USERNAME) VALUES( ?,?,  ?,  ?,  ?, ?,?)";
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setString(1, name);
             ps.setString(2, email);
             ps.setString(3, mobile);
             ps.setString(4, address);
             ps.setString(5, password);
-            ps.setString(6,"cashier");
+            ps.setString(6, "cashier");
+            ps.setString(7, username);
 
             row = ps.executeUpdate();
 
             System.out.println("Registration successfull");
-              JOptionPane.showMessageDialog(null, "Registration successfull" , "Information", JOptionPane.INFORMATION_MESSAGE);
-              
+            JOptionPane.showMessageDialog(null, "Registration successfull", "Information", JOptionPane.INFORMATION_MESSAGE);
 
         } catch (SQLException ex) {
-            
+
             JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", JOptionPane.INFORMATION_MESSAGE);
 
         }
-    }//GEN-LAST:event_RegisterButtonActionPerformed
+    }
 
-    private void LoginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoginButtonActionPerformed
+    private void updateData() {
+        int row = -1;
+        String name = txtName1.getText();
+        txtName1.setText("");
+        String address = txtAddress.getText();
+        String email = toLowerCase(txtEmail.getText());
+        String mobile = txtMobile.getText();
+        String password = txtPassword.getText();
+        String username = toLowerCase(txtUserName.getText());
+        txtEmail.setText("");
+        txtMobile.setText("");
+        txtPassword.setText("");
+
+        try {
+            String sql = "UPDATE LOGINDATA SET NAME = '" + name + "', USERNAME = '" + username + "', MOBILE = '" + mobile + "', ADDRESS = '" + address + "', PASSWORD = '" + password + "'  WHERE EMAIL = '" + email + "'";
+            Statement st = con.createStatement();
+            row = st.executeUpdate(sql);
+            dispose();
+            JOptionPane.showMessageDialog(null, "Data updated successful. Row:" + row, "Information", JOptionPane.INFORMATION_MESSAGE);
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", JOptionPane.INFORMATION_MESSAGE);
+
+        }
+
+    }
+    
+    
+    private void registerNewAdmin(){
+         int row = -1;
+        String name = txtName1.getText();
+        txtName1.setText("");
+        String address = txtAddress.getText();
+        String email = toLowerCase(txtEmail.getText());
+        String mobile = txtMobile.getText();
+        String password = txtPassword.getText();
+        String username = toLowerCase(txtUserName.getText());
+        txtEmail.setText("");
+        txtMobile.setText("");
+        txtPassword.setText("");
+        try {
+            String sql = "INSERT INTO LOGINDATA(NAME,EMAIL, MOBILE,ADDRESS,PASSWORD,ROLE,USERNAME) VALUES( ?,?,  ?,  ?,  ?, ?,?)";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setString(1, name);
+            ps.setString(2, email);
+            ps.setString(3, mobile);
+            ps.setString(4, address);
+            ps.setString(5, password);
+            ps.setString(6, "admin");
+            ps.setString(7, username);
+
+            row = ps.executeUpdate();
+
+            System.out.println("Registration successfull");
+            
+            dispose();
+            JOptionPane.showMessageDialog(null, "Registration successfull", "Information", JOptionPane.INFORMATION_MESSAGE);
+            
+
+        } catch (SQLException ex) {
+
+            JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", JOptionPane.INFORMATION_MESSAGE);
+
+        }
+    }
+
+
+    private void RegisterButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RegisterButtonActionPerformed
         // TODO add your handling code here:
-        new LoginPage().setVisible(true);
-        
-        dispose();
-    }//GEN-LAST:event_LoginButtonActionPerformed
+        if (mode == 1) {
+            updateData();
+        } else if (mode == 2) {
+            registerNewAdmin();
+        } else {
+
+            registrationProcess();
+        }
+    }//GEN-LAST:event_RegisterButtonActionPerformed
 
     private void exitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitButtonActionPerformed
         // TODO add your handling code here:
@@ -250,15 +400,15 @@ public class RegisterPage extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel CashierRegiLabel;
     private javax.swing.JButton ClearButton;
-    private javax.swing.JButton LoginButton;
     private javax.swing.JButton RegisterButton;
     private javax.swing.JButton exitButton;
-    private javax.swing.JLabel jLabel1;
     private textfield.TextField txtAddress;
     private textfield.TextField txtEmail;
     private textfield.TextField txtMobile;
-    private textfield.TextField txtName;
+    private textfield.TextField txtName1;
     private textfield.TextField txtPassword;
+    private textfield.TextField txtUserName;
     // End of variables declaration//GEN-END:variables
 }

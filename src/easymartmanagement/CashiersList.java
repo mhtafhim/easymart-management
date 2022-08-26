@@ -12,20 +12,22 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import static jdk.nashorn.internal.objects.NativeString.toLowerCase;
+import static jdk.nashorn.internal.objects.NativeString.toUpperCase;
 import net.proteanit.sql.DbUtils;
 
 /**
  *
  * @author Tafhim
  */
-public class CashierList extends javax.swing.JFrame {
+public class CashiersList extends javax.swing.JFrame {
 
     /**
      * Creates new form CashierList
      */
-     Connection con;
+    Connection con;
 
-    public CashierList() {
+    public CashiersList() {
         initComponents();
         try {
             con = DriverManager.getConnection("jdbc:derby://localhost:1527/easymart");
@@ -36,7 +38,7 @@ public class CashierList extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, ex.getMessage(), "Error in connection", JOptionPane.INFORMATION_MESSAGE);
         }
         showAll();
-        
+
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }
 
@@ -66,10 +68,10 @@ public class CashierList extends javax.swing.JFrame {
         cashierTable = new javax.swing.JTable();
         addCashier = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        deleteButton = new javax.swing.JButton();
+        refreshButton = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
-        textField2 = new textfield.TextField();
+        emailField = new textfield.TextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -194,30 +196,40 @@ public class CashierList extends javax.swing.JFrame {
         getContentPane().add(addCashier, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 90, 260, 50));
 
         jButton2.setText("Update Cashier Info");
-        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 90, 240, 50));
-
-        jButton3.setText("Delete Cashier ");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                jButton2ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 90, 220, 50));
+        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 90, 240, 50));
 
-        jButton4.setText("Search Cashier");
-        getContentPane().add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 90, 200, 50));
+        deleteButton.setText("Delete Cashier ");
+        deleteButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deleteButtonActionPerformed(evt);
+            }
+        });
+        getContentPane().add(deleteButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 90, 220, 50));
+
+        refreshButton.setText("Refresh");
+        refreshButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                refreshButtonActionPerformed(evt);
+            }
+        });
+        getContentPane().add(refreshButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 90, 200, 50));
 
         jPanel1.setBackground(new java.awt.Color(140, 207, 207));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        textField2.setBackground(new java.awt.Color(140, 207, 207));
-        textField2.setLabelText("Cashier Email");
-        textField2.addActionListener(new java.awt.event.ActionListener() {
+        emailField.setBackground(new java.awt.Color(140, 207, 207));
+        emailField.setLabelText("Cashier Email");
+        emailField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                textField2ActionPerformed(evt);
+                emailFieldActionPerformed(evt);
             }
         });
-        jPanel1.add(textField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 20, 990, -1));
+        jPanel1.add(emailField, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 20, 990, -1));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1060, 610));
 
@@ -230,13 +242,69 @@ public class CashierList extends javax.swing.JFrame {
         new RegisterPage().setVisible(true);
     }//GEN-LAST:event_addCashierActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton3ActionPerformed
+    private void deleteButtonAction() {
+        int row = -1;
+        try {
+            String email = toLowerCase(emailField.getText());
+            String sql = "DELETE FROM LOGINDATA WHERE EMAIL = '" + email + "'";
 
-    private void textField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textField2ActionPerformed
+            Statement st = con.createStatement();
+
+            row = st.executeUpdate(sql);
+            emailField.setText("");
+            System.out.println("Deletion successful. Row:" + row + " Information");
+            //  JOptionPane.showMessageDialog(null, "Deletion successful. Row:" + row, "Information", JOptionPane.INFORMATION_MESSAGE);
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", JOptionPane.INFORMATION_MESSAGE);
+        }
+        showAll();
+    }
+
+
+    private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_textField2ActionPerformed
+
+        String email = emailField.getText();
+
+        if (email.equals("")) {
+            JOptionPane.showMessageDialog(null, "Please Input the Email/username of cashier you want to delete.");
+        } else {
+            int choose = JOptionPane.showConfirmDialog(null,
+                    "Do you really want to delete ('" + email + "') ?",
+                    "Confirm Remove", JOptionPane.YES_NO_OPTION,
+                    JOptionPane.INFORMATION_MESSAGE);
+            if (choose == JOptionPane.YES_OPTION) {
+
+                deleteButtonAction();
+
+            } else {
+                System.out.println("do nothing");
+            }
+        }
+
+
+    }//GEN-LAST:event_deleteButtonActionPerformed
+
+    private void emailFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_emailFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_emailFieldActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        if (emailField.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "Please Input the Email/username of cashier you want to update info.");
+        } else {
+            new RegisterPage(emailField.getText()).setVisible(true);
+        }
+
+
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void refreshButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshButtonActionPerformed
+        // TODO add your handling code here:
+        showAll();
+    }//GEN-LAST:event_refreshButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -255,20 +323,23 @@ public class CashierList extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(CashierList.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CashiersList.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(CashierList.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CashiersList.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(CashierList.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CashiersList.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(CashierList.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CashiersList.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new CashierList().setVisible(true);
+                new CashiersList().setVisible(true);
             }
         });
     }
@@ -276,11 +347,11 @@ public class CashierList extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addCashier;
     private javax.swing.JTable cashierTable;
+    private javax.swing.JButton deleteButton;
+    private textfield.TextField emailField;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private textfield.TextField textField2;
+    private javax.swing.JButton refreshButton;
     // End of variables declaration//GEN-END:variables
 }

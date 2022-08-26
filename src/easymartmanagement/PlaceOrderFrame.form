@@ -390,8 +390,8 @@
                           <Component id="itemNameField" max="32767" attributes="0"/>
                           <Component id="itemCodeField" alignment="0" min="-2" pref="125" max="-2" attributes="0"/>
                           <Component id="quantityField" alignment="0" max="32767" attributes="0"/>
-                          <Component id="totalPriceLabel" pref="152" max="32767" attributes="0"/>
-                          <Component id="jLabel16" alignment="0" min="-2" pref="86" max="-2" attributes="0"/>
+                          <Component id="totalPriceLabel" alignment="1" min="-2" pref="152" max="-2" attributes="0"/>
+                          <Component id="jLabel16" alignment="0" min="-2" pref="125" max="-2" attributes="0"/>
                       </Group>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
@@ -485,7 +485,7 @@
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="cc" green="ff" red="99" type="rgb"/>
                 </Property>
-                <Property name="labelText" type="java.lang.String" value="Price"/>
+                <Property name="labelText" type="java.lang.String" value="Price(tk.)"/>
               </Properties>
             </Component>
             <Component class="button.MyButton" name="searchItemButton">
@@ -522,7 +522,7 @@
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel16">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Total Price : "/>
+                <Property name="text" type="java.lang.String" value="Total Price(tk.) : "/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="totalPriceLabel">
