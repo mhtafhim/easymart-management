@@ -67,20 +67,80 @@ public class adminPanelFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        JscrollPane = new javax.swing.JScrollPane();
-        adminPanelTable = new javax.swing.JTable();
         emailField = new textfield.TextField();
-        RefreshButton = new javax.swing.JButton();
         addAdminButton = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
         UpdateAdminButton = new javax.swing.JButton();
         DeleteAdminButton = new javax.swing.JButton();
-        jPanel1 = new javax.swing.JPanel();
+        RefreshButton = new javax.swing.JButton();
+        JscrollPane = new javax.swing.JScrollPane();
+        adminPanelTable = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        emailField.setBackground(new java.awt.Color(140, 207, 207));
+        emailField.setLabelText("Admin Email");
+        getContentPane().add(emailField, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, 890, -1));
+
+        addAdminButton.setBackground(new java.awt.Color(140, 207, 207));
+        addAdminButton.setText("Add New Admin");
+        addAdminButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addAdminButtonActionPerformed(evt);
+            }
+        });
+        getContentPane().add(addAdminButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 90, 170, 40));
+
+        jPanel1.setBackground(new java.awt.Color(140, 207, 207));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        UpdateAdminButton.setBackground(new java.awt.Color(140, 207, 207));
+        UpdateAdminButton.setText("Update Admin Info");
+        UpdateAdminButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                UpdateAdminButtonActionPerformed(evt);
+            }
+        });
+        jPanel1.add(UpdateAdminButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 90, 180, 40));
+
+        DeleteAdminButton.setBackground(new java.awt.Color(140, 207, 207));
+        DeleteAdminButton.setText("Delete Admin");
+        DeleteAdminButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                DeleteAdminButtonActionPerformed(evt);
+            }
+        });
+        jPanel1.add(DeleteAdminButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 90, 190, 40));
+
+        RefreshButton.setBackground(new java.awt.Color(140, 207, 207));
+        RefreshButton.setText("Refresh");
+        RefreshButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                RefreshButtonActionPerformed(evt);
+            }
+        });
+        jPanel1.add(RefreshButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 90, 210, 40));
+
+        adminPanelTable.setBackground(new java.awt.Color(140, 207, 207));
         adminPanelTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
                 {null, null, null, null},
                 {null, null, null, null},
                 {null, null, null, null},
@@ -92,50 +152,9 @@ public class adminPanelFrame extends javax.swing.JFrame {
         ));
         JscrollPane.setViewportView(adminPanelTable);
 
-        getContentPane().add(JscrollPane, new org.netbeans.lib.awtextra.AbsoluteConstraints(26, 148, 1106, 470));
+        jPanel1.add(JscrollPane, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 160, 890, 340));
 
-        emailField.setLabelText("Admin Email");
-        getContentPane().add(emailField, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, 1110, -1));
-
-        RefreshButton.setBackground(new java.awt.Color(140, 207, 207));
-        RefreshButton.setText("Refresh");
-        RefreshButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                RefreshButtonActionPerformed(evt);
-            }
-        });
-        getContentPane().add(RefreshButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 90, 250, 40));
-
-        addAdminButton.setBackground(new java.awt.Color(140, 207, 207));
-        addAdminButton.setText("Add New Admin");
-        addAdminButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                addAdminButtonActionPerformed(evt);
-            }
-        });
-        getContentPane().add(addAdminButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 90, 230, 40));
-
-        UpdateAdminButton.setBackground(new java.awt.Color(140, 207, 207));
-        UpdateAdminButton.setText("Update Admin Info");
-        UpdateAdminButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                UpdateAdminButtonActionPerformed(evt);
-            }
-        });
-        getContentPane().add(UpdateAdminButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 90, 240, 40));
-
-        DeleteAdminButton.setBackground(new java.awt.Color(140, 207, 207));
-        DeleteAdminButton.setText("Delete Admin");
-        DeleteAdminButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                DeleteAdminButtonActionPerformed(evt);
-            }
-        });
-        getContentPane().add(DeleteAdminButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 90, 220, 40));
-
-        jPanel1.setBackground(new java.awt.Color(140, 207, 207));
-        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1150, 640));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 940, 530));
 
         pack();
         setLocationRelativeTo(null);

@@ -462,6 +462,7 @@ public class Dashboard extends javax.swing.JFrame {
 
     private void adminButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_adminButtonActionPerformed
         // TODO add your handling code here:
+        new adminPanelFrame().setVisible(true);
     }//GEN-LAST:event_adminButtonActionPerformed
 
     private void aboutButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aboutButton1ActionPerformed

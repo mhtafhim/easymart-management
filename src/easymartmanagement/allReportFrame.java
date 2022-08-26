@@ -5,6 +5,8 @@
  */
 package easymartmanagement;
 
+
+import java.awt.Toolkit;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -12,6 +14,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import static jdk.nashorn.internal.objects.NativeString.toLowerCase;
 import net.proteanit.sql.DbUtils;
 
 /**
@@ -36,6 +39,10 @@ public class allReportFrame extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, ex.getMessage(), "Error in connection", JOptionPane.INFORMATION_MESSAGE);
         }
         showAll();
+        
+        
+        
+        this.setTitle("All Reports");
         
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }
@@ -64,6 +71,10 @@ public class allReportFrame extends javax.swing.JFrame {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         allreporttable = new javax.swing.JTable();
+        orderIDField = new textfield.TextField();
+        deleteButton = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
+        CloseButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -79,13 +90,88 @@ public class allReportFrame extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        allreporttable.setGridColor(new java.awt.Color(140, 207, 207));
         jScrollPane1.setViewportView(allreporttable);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 140, 1120, -1));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, 1020, -1));
+
+        orderIDField.setLabelText("OrderID");
+        getContentPane().add(orderIDField, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 480, 320, -1));
+
+        deleteButton.setText("Delete Report");
+        deleteButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deleteButtonActionPerformed(evt);
+            }
+        });
+        getContentPane().add(deleteButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 480, 270, 40));
+
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        CloseButton.setText("Close");
+        CloseButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CloseButtonActionPerformed(evt);
+            }
+        });
+        jPanel1.add(CloseButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 480, 260, 40));
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1050, 550));
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    
+      private void deleteButtonAction() {
+        int row = -1;
+        try {
+            int orderID = Integer.parseInt(orderIDField.getText());
+            String sql = "DELETE FROM ALLREPORTTABLE WHERE ORDERID = " + orderID + "";
+
+            Statement st = con.createStatement();
+
+            row = st.executeUpdate(sql);
+            orderIDField.setText("");
+            System.out.println("Deletion successful. Row:" + row + " Information");
+            //  JOptionPane.showMessageDialog(null, "Deletion successful. Row:" + row, "Information", JOptionPane.INFORMATION_MESSAGE);
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", JOptionPane.INFORMATION_MESSAGE);
+        }
+        showAll();
+    }
+
+    
+    
+    
+    private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtonActionPerformed
+        // TODO add your handling code here:
+        
+        String email = orderIDField.getText();
+
+        if (email.equals("")) {
+            JOptionPane.showMessageDialog(null, "Please Input the Order ID you want to delete.");
+        } else {
+            int choose = JOptionPane.showConfirmDialog(null,
+                    "Do you really want to delete ('" + email + "') ?",
+                    "Confirm Remove", JOptionPane.YES_NO_OPTION,
+                    JOptionPane.INFORMATION_MESSAGE);
+            if (choose == JOptionPane.YES_OPTION) {
+
+                deleteButtonAction();
+
+            } else {
+                System.out.println("do nothing");
+            }
+        }
+
+    }//GEN-LAST:event_deleteButtonActionPerformed
+
+    private void CloseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CloseButtonActionPerformed
+        // TODO add your handling code here:
+        dispose();
+    }//GEN-LAST:event_CloseButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -123,7 +209,11 @@ public class allReportFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton CloseButton;
     private javax.swing.JTable allreporttable;
+    private javax.swing.JButton deleteButton;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private textfield.TextField orderIDField;
     // End of variables declaration//GEN-END:variables
 }

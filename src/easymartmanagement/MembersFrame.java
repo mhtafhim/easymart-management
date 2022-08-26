@@ -32,6 +32,7 @@ public class MembersFrame extends javax.swing.JFrame {
      * Creates new form MembersFrame
      */
    Connection con;
+   int mode = 0;
 
     public MembersFrame() {
         initComponents();
@@ -47,6 +48,27 @@ public class MembersFrame extends javax.swing.JFrame {
         
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }
+    
+      public MembersFrame(int x) {
+        initComponents();
+        try {
+            con = DriverManager.getConnection("jdbc:derby://localhost:1527/easymart");
+            if (con != null) {
+                System.out.println("connection establised");
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage(), "Error in connection", JOptionPane.INFORMATION_MESSAGE);
+        }
+        showAll2();
+        
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        
+        updateMember.setEnabled(false);
+        deleteMember.setEnabled(false);
+      //  mode = 1;
+    }
+    
+    
 
     private void showAll() {
         try {
@@ -60,6 +82,20 @@ public class MembersFrame extends javax.swing.JFrame {
         }
 
     }
+    
+    
+    private void showAll2(){
+          try {
+            String sql = "SELECT MEMBERID,MEMBERNAME,REGISTERDATE FROM MEMBERS ";
+            Statement st = con.createStatement();
+            ResultSet rs = st.executeQuery(sql);
+            MEMBERTABLE.setModel(DbUtils.resultSetToTableModel(rs));
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", JOptionPane.INFORMATION_MESSAGE);
+
+        }
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -251,7 +287,7 @@ public class MembersFrame extends javax.swing.JFrame {
                 updateMemberActionPerformed(evt);
             }
         });
-        getContentPane().add(updateMember, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 110, 210, -1));
+        getContentPane().add(updateMember, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 110, 210, 30));
 
         deleteMember.setText("Delete Member");
         deleteMember.addActionListener(new java.awt.event.ActionListener() {

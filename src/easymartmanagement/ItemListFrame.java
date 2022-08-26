@@ -43,6 +43,25 @@ public class ItemListFrame extends javax.swing.JFrame {
         
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }
+    
+     public ItemListFrame(int x) {
+        initComponents();
+        try {
+            con = DriverManager.getConnection("jdbc:derby://localhost:1527/easymart");
+            if (con != null) {
+                System.out.println("connection establised");
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage(), "Error in connection", JOptionPane.INFORMATION_MESSAGE);
+        }
+        showAll();
+        
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        deleteItemButton.setEnabled(false);
+    }
+    
+    
+    
 
     private void showAll() {
         try {
@@ -231,22 +250,22 @@ public class ItemListFrame extends javax.swing.JFrame {
                         .addGap(72, 72, 72)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(addItemButton)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(updateItemButton)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(deleteItemButton)
-                                .addGap(18, 18, 18)
-                                .addComponent(searchItemButton, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel3)
                                     .addComponent(jLabel4))
                                 .addGap(71, 71, 71)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(packSizeField, javax.swing.GroupLayout.DEFAULT_SIZE, 289, Short.MAX_VALUE)
-                                    .addComponent(unitPriceField))))
-                        .addGap(28, 28, 28)))
+                                    .addComponent(unitPriceField)))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(addItemButton)
+                                .addGap(17, 17, 17)
+                                .addComponent(updateItemButton)
+                                .addGap(18, 18, 18)
+                                .addComponent(deleteItemButton)
+                                .addGap(18, 18, 18)
+                                .addComponent(searchItemButton, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(12, 12, 12)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
