@@ -49,21 +49,47 @@ public class LoginPage extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
+        jPanel2 = new javax.swing.JPanel();
+        txtloginEmail = new textfield.TextField();
+        txtLoginPassword = new textfield.PasswordField();
         LoginButton = new javax.swing.JButton();
         LoginClear = new javax.swing.JButton();
         LoginExit = new javax.swing.JButton();
-        txtloginEmail = new textfield.TextField();
-        txtLoginPassword = new textfield.PasswordField();
-        jPanel1 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
-        jLabel1.setText("Login");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 63, -1, -1));
+        jPanel1.setBackground(new java.awt.Color(0, 153, 153));
 
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 230, Short.MAX_VALUE)
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 600, Short.MAX_VALUE)
+        );
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 230, 600));
+
+        jPanel2.setBackground(new java.awt.Color(140, 207, 207));
+
+        txtloginEmail.setBackground(new java.awt.Color(140, 207, 207));
+        txtloginEmail.setLabelText("Email");
+
+        txtLoginPassword.setBackground(new java.awt.Color(140, 207, 207));
+        txtLoginPassword.setLabelText("Password");
+        txtLoginPassword.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtLoginPasswordKeyPressed(evt);
+            }
+        });
+
+        LoginButton.setBackground(new java.awt.Color(140, 207, 207));
         LoginButton.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         LoginButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/login.png"))); // NOI18N
         LoginButton.setText("Login");
@@ -72,8 +98,8 @@ public class LoginPage extends javax.swing.JFrame {
                 LoginButtonActionPerformed(evt);
             }
         });
-        getContentPane().add(LoginButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 325, 128, 44));
 
+        LoginClear.setBackground(new java.awt.Color(140, 207, 207));
         LoginClear.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         LoginClear.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/clear.png"))); // NOI18N
         LoginClear.setText("Clear");
@@ -82,8 +108,8 @@ public class LoginPage extends javax.swing.JFrame {
                 LoginClearActionPerformed(evt);
             }
         });
-        getContentPane().add(LoginClear, new org.netbeans.lib.awtextra.AbsoluteConstraints(445, 325, 125, 44));
 
+        LoginExit.setBackground(new java.awt.Color(140, 207, 207));
         LoginExit.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         LoginExit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/exit small.png"))); // NOI18N
         LoginExit.setText("Exit");
@@ -92,35 +118,49 @@ public class LoginPage extends javax.swing.JFrame {
                 LoginExitActionPerformed(evt);
             }
         });
-        getContentPane().add(LoginExit, new org.netbeans.lib.awtextra.AbsoluteConstraints(352, 497, 120, 44));
 
-        txtloginEmail.setBackground(new java.awt.Color(0, 153, 153));
-        txtloginEmail.setLabelText("Email");
-        getContentPane().add(txtloginEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(208, 156, 362, 68));
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
+        jLabel1.setText("Login");
 
-        txtLoginPassword.setBackground(new java.awt.Color(0, 153, 153));
-        txtLoginPassword.setLabelText("Password");
-        txtLoginPassword.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                txtLoginPasswordKeyPressed(evt);
-            }
-        });
-        getContentPane().add(txtLoginPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(208, 242, 362, 67));
-
-        jPanel1.setBackground(new java.awt.Color(0, 153, 153));
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 740, Short.MAX_VALUE)
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(104, 104, 104)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1)
+                    .addComponent(txtloginEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 362, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtLoginPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 362, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(42, 42, 42)
+                        .addComponent(LoginButton, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(67, 67, 67)
+                        .addComponent(LoginClear, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(144, 144, 144)
+                        .addComponent(LoginExit, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(214, Short.MAX_VALUE))
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 600, Short.MAX_VALUE)
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(54, 54, 54)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 72, Short.MAX_VALUE)
+                .addComponent(txtloginEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(txtLoginPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(16, 16, 16)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(LoginButton, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(LoginClear, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(128, 128, 128)
+                .addComponent(LoginExit, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(45, 45, 45))
         );
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 740, 600));
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 0, 680, 600));
 
         pack();
         setLocationRelativeTo(null);
@@ -231,6 +271,7 @@ public class LoginPage extends javax.swing.JFrame {
     private javax.swing.JButton LoginExit;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private textfield.PasswordField txtLoginPassword;
     private textfield.TextField txtloginEmail;
     // End of variables declaration//GEN-END:variables
