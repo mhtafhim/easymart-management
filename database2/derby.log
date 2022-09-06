@@ -1,7 +1,7 @@
-Sun Sep 04 18:53:40 BDT 2022 : Apache Derby Network Server - 10.14.2.0 - (1828579) started and ready to accept connections on port 1527
+Tue Sep 06 21:01:39 BDT 2022 : Apache Derby Network Server - 10.14.2.0 - (1828579) started and ready to accept connections on port 1527
 ----------------------------------------------------------------
-Sun Sep 04 18:53:42 BDT 2022:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.14.2.0 - (1828579): instance a816c00e-0183-0890-5323-ffffe3b43bae 
+Tue Sep 06 21:01:43 BDT 2022:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.14.2.0 - (1828579): instance a816c00e-0183-1352-37c4-ffffe3b43bae 
 on database directory C:\Users\Tafhim\Documents\GitHub\easymart-management\database2\easymart with class loader sun.misc.Launcher$AppClassLoader@1d44bcfa 
 Loaded from file:/C:/Users/Tafhim/Documents/GitHub/Easy-Mart/db-derby-10.14.2.0-bin/lib/derby.jar
 java.vendor=Oracle Corporation
@@ -12,9 +12,3 @@ os.arch=amd64
 os.version=10.0
 derby.system.home=C:\Users\Tafhim\Documents\GitHub\easymart-management\database2
 Database Class Loader started - derby.database.classpath=''
-----------------------------------------------------------------
-Sun Sep 04 20:15:17 BDT 2022: Shutting down Derby engine
-----------------------------------------------------------------
-Sun Sep 04 20:15:17 BDT 2022:
-Shutting down instance a816c00e-0183-0890-5323-ffffe3b43bae on database directory C:\Users\Tafhim\Documents\GitHub\easymart-management\database2\easymart with class loader sun.misc.Launcher$AppClassLoader@1d44bcfa 
-----------------------------------------------------------------

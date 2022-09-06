@@ -102,10 +102,12 @@ public class ItemListFrame extends javax.swing.JFrame {
         unitPriceField = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         searchItemButton = new javax.swing.JButton();
-        CloseButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jPanel1.setBackground(new java.awt.Color(140, 207, 207));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         deleteItemButton.setText("Delete Item");
         deleteItemButton.addActionListener(new java.awt.event.ActionListener() {
@@ -113,8 +115,10 @@ public class ItemListFrame extends javax.swing.JFrame {
                 deleteItemButtonActionPerformed(evt);
             }
         });
+        jPanel1.add(deleteItemButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(718, 135, -1, -1));
 
         jLabel5.setText("Quantity");
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(19, 138, -1, -1));
 
         ITEMTABLE.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -176,15 +180,23 @@ public class ItemListFrame extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(ITEMTABLE);
 
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(19, 173, 941, 304));
+        jPanel1.add(itemCodeField, new org.netbeans.lib.awtextra.AbsoluteConstraints(154, 38, 256, -1));
+
         jLabel2.setText("Item Description");
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(19, 85, -1, -1));
+        jPanel1.add(itemDescriptionField, new org.netbeans.lib.awtextra.AbsoluteConstraints(154, 82, 256, -1));
 
         jLabel3.setText("Pack Size");
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(482, 41, -1, -1));
 
         quantityField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 quantityFieldActionPerformed(evt);
             }
         });
+        jPanel1.add(quantityField, new org.netbeans.lib.awtextra.AbsoluteConstraints(154, 135, 256, -1));
+        jPanel1.add(packSizeField, new org.netbeans.lib.awtextra.AbsoluteConstraints(621, 38, 289, -1));
 
         addItemButton.setText("Add Item");
         addItemButton.addActionListener(new java.awt.event.ActionListener() {
@@ -192,8 +204,10 @@ public class ItemListFrame extends javax.swing.JFrame {
                 addItemButtonActionPerformed(evt);
             }
         });
+        jPanel1.add(addItemButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(465, 135, -1, -1));
 
         jLabel4.setText("Unit Price");
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(482, 85, -1, -1));
 
         updateItemButton.setText("Update Item");
         updateItemButton.addActionListener(new java.awt.event.ActionListener() {
@@ -201,14 +215,17 @@ public class ItemListFrame extends javax.swing.JFrame {
                 updateItemButtonActionPerformed(evt);
             }
         });
+        jPanel1.add(updateItemButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(582, 135, -1, -1));
 
         unitPriceField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 unitPriceFieldActionPerformed(evt);
             }
         });
+        jPanel1.add(unitPriceField, new org.netbeans.lib.awtextra.AbsoluteConstraints(621, 82, 289, -1));
 
         jLabel1.setText("Item Code");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(19, 41, -1, -1));
 
         searchItemButton.setText("Search");
         searchItemButton.addActionListener(new java.awt.event.ActionListener() {
@@ -216,95 +233,9 @@ public class ItemListFrame extends javax.swing.JFrame {
                 searchItemButtonActionPerformed(evt);
             }
         });
+        jPanel1.add(searchItemButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(851, 135, 109, -1));
 
-        CloseButton.setText("Close");
-        CloseButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                CloseButtonActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(19, 19, 19)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane1)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel1)
-                                    .addComponent(jLabel5))
-                                .addGap(52, 52, 52))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addGap(18, 18, 18)))
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(quantityField)
-                                .addComponent(itemCodeField, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(itemDescriptionField, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(72, 72, 72)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel3)
-                                    .addComponent(jLabel4))
-                                .addGap(71, 71, 71)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(packSizeField, javax.swing.GroupLayout.DEFAULT_SIZE, 289, Short.MAX_VALUE)
-                                    .addComponent(unitPriceField)))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(addItemButton)
-                                .addGap(17, 17, 17)
-                                .addComponent(updateItemButton)
-                                .addGap(18, 18, 18)
-                                .addComponent(deleteItemButton)
-                                .addGap(18, 18, 18)
-                                .addComponent(searchItemButton, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(12, 12, 12)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(CloseButton)
-                .addGap(26, 26, 26))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(38, 38, 38)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(itemCodeField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3)
-                    .addComponent(packSizeField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(itemDescriptionField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel4)
-                    .addComponent(unitPriceField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(27, 27, 27)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(quantityField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel5))
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(updateItemButton)
-                        .addComponent(addItemButton)
-                        .addComponent(deleteItemButton)
-                        .addComponent(searchItemButton)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 304, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(CloseButton)
-                .addGap(1408, 1408, 1408))
-        );
-
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 532));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 980, 510));
 
         pack();
         setLocationRelativeTo(null);
@@ -425,11 +356,6 @@ public class ItemListFrame extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_searchItemButtonActionPerformed
 
-    private void CloseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CloseButtonActionPerformed
-        // TODO add your handling code here:
-        dispose();
-    }//GEN-LAST:event_CloseButtonActionPerformed
-
     /**
      * @param args the command line arguments
      */
@@ -467,7 +393,6 @@ public class ItemListFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton CloseButton;
     private javax.swing.JTable ITEMTABLE;
     private javax.swing.JButton addItemButton;
     private javax.swing.JButton deleteItemButton;

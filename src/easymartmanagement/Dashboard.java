@@ -272,6 +272,7 @@ public class Dashboard extends javax.swing.JFrame {
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
+        jDesktopPane1 = new javax.swing.JDesktopPane();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         gotoCashierButton = new button.MyButton();
@@ -330,15 +331,25 @@ public class Dashboard extends javax.swing.JFrame {
         dateChooseField = new textfield.TextField();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
-        myButton1 = new button.MyButton();
-        myButton2 = new button.MyButton();
-        myButton3 = new button.MyButton();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
 
         jMenu1.setText("File");
         jMenuBar1.add(jMenu1);
 
         jMenu2.setText("Edit");
         jMenuBar1.add(jMenu2);
+
+        javax.swing.GroupLayout jDesktopPane1Layout = new javax.swing.GroupLayout(jDesktopPane1);
+        jDesktopPane1.setLayout(jDesktopPane1Layout);
+        jDesktopPane1Layout.setHorizontalGroup(
+            jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+        jDesktopPane1Layout.setVerticalGroup(
+            jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -458,7 +469,7 @@ public class Dashboard extends javax.swing.JFrame {
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(358, Short.MAX_VALUE)
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(252, 252, 252))
         );
@@ -583,7 +594,7 @@ public class Dashboard extends javax.swing.JFrame {
                 .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(39, 39, 39)
                 .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
                 .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(23, 23, 23))
         );
@@ -864,7 +875,7 @@ public class Dashboard extends javax.swing.JFrame {
                 refreshButtonActionPerformed(evt);
             }
         });
-        jPanel2.add(refreshButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(749, 45, -1, -1));
+        jPanel2.add(refreshButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 40, -1, -1));
 
         dateChooseField.setBackground(new java.awt.Color(140, 207, 207));
         dateChooseField.setLabelText("Choose Date");
@@ -879,17 +890,13 @@ public class Dashboard extends javax.swing.JFrame {
         jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel9.setText("Daily Summary");
         jPanel2.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 40, 336, 36));
+        jPanel2.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 430, 220, 40));
 
-        myButton1.setText("myButton1");
-        jPanel2.add(myButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 420, -1, -1));
+        jLabel11.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
+        jLabel11.setText("Choose date to see sales summary for specific date or between specific date  :");
+        jPanel2.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 400, -1, -1));
 
-        myButton2.setText("myButton2");
-        jPanel2.add(myButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 420, -1, -1));
-
-        myButton3.setText("myButton3");
-        jPanel2.add(myButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 420, -1, -1));
-
-        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(239, 0, 830, 650));
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(239, 0, 840, 650));
 
         pack();
         setLocationRelativeTo(null);
@@ -994,7 +1001,10 @@ public class Dashboard extends javax.swing.JFrame {
     private javax.swing.ButtonGroup buttonGroup2;
     private textfield.TextField dateChooseField;
     private button.MyButton gotoCashierButton;
+    private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
@@ -1034,9 +1044,6 @@ public class Dashboard extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
-    private button.MyButton myButton1;
-    private button.MyButton myButton2;
-    private button.MyButton myButton3;
     private javax.swing.JButton refreshButton;
     private javax.swing.JLabel soldItemsLabel;
     private javax.swing.JLabel soldItemsLabel2;

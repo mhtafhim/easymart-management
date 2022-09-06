@@ -105,25 +105,29 @@ public class MembersFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
-        memberIDField = new javax.swing.JTextField();
-        memberField = new javax.swing.JTextField();
         addressField = new javax.swing.JTextField();
+        memberField = new javax.swing.JTextField();
+        memberIDField = new javax.swing.JTextField();
+        jButton5 = new javax.swing.JButton();
         emailField = new javax.swing.JTextField();
+        jButton6 = new javax.swing.JButton();
         phoneField = new javax.swing.JTextField();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        MEMBERTABLE = new javax.swing.JTable();
         addMember = new javax.swing.JButton();
         updateMember = new javax.swing.JButton();
-        deleteMember = new javax.swing.JButton();
         searchMember = new javax.swing.JButton();
+        deleteMember = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        MEMBERTABLE = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jPanel1.setBackground(new java.awt.Color(140, 207, 207));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jButton1.setText("Member ID");
         jButton1.setActionCommand("memberid");
@@ -132,10 +136,10 @@ public class MembersFrame extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(53, 16, 125, -1));
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 125, -1));
 
         jButton2.setText("Member Name");
-        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(53, 63, 125, -1));
+        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, 125, -1));
 
         jButton3.setText("Address");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -143,24 +147,56 @@ public class MembersFrame extends javax.swing.JFrame {
                 jButton3ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(53, 110, 125, -1));
-
-        jButton5.setText("Email");
-        getContentPane().add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 16, 139, -1));
-
-        jButton6.setText("Phone Number");
-        getContentPane().add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 63, -1, -1));
+        jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, 125, -1));
+        jPanel1.add(addressField, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 110, 225, -1));
+        jPanel1.add(memberField, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 60, 225, -1));
 
         memberIDField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 memberIDFieldActionPerformed(evt);
             }
         });
-        getContentPane().add(memberIDField, new org.netbeans.lib.awtextra.AbsoluteConstraints(207, 17, 225, -1));
-        getContentPane().add(memberField, new org.netbeans.lib.awtextra.AbsoluteConstraints(207, 64, 225, -1));
-        getContentPane().add(addressField, new org.netbeans.lib.awtextra.AbsoluteConstraints(207, 111, 225, -1));
-        getContentPane().add(emailField, new org.netbeans.lib.awtextra.AbsoluteConstraints(647, 17, 301, -1));
-        getContentPane().add(phoneField, new org.netbeans.lib.awtextra.AbsoluteConstraints(647, 64, 301, -1));
+        jPanel1.add(memberIDField, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 10, 225, -1));
+
+        jButton5.setText("Email");
+        jPanel1.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 10, 120, -1));
+        jPanel1.add(emailField, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 10, 270, -1));
+
+        jButton6.setText("Phone Number");
+        jPanel1.add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 60, 120, -1));
+        jPanel1.add(phoneField, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 60, 270, -1));
+
+        addMember.setText("Add Member");
+        addMember.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addMemberActionPerformed(evt);
+            }
+        });
+        jPanel1.add(addMember, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 100, 200, 30));
+
+        updateMember.setText("Update Member Info");
+        updateMember.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                updateMemberActionPerformed(evt);
+            }
+        });
+        jPanel1.add(updateMember, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 100, -1, 30));
+
+        searchMember.setText("Search ");
+        searchMember.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchMemberActionPerformed(evt);
+            }
+        });
+        jPanel1.add(searchMember, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 150, 180, 30));
+
+        deleteMember.setText("Delete Member");
+        deleteMember.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deleteMemberActionPerformed(evt);
+            }
+        });
+        jPanel1.add(deleteMember, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 150, 200, -1));
 
         MEMBERTABLE.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -271,39 +307,9 @@ public class MembersFrame extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(MEMBERTABLE);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(53, 212, 895, -1));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 200, 870, 340));
 
-        addMember.setText("Add Member");
-        addMember.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                addMemberActionPerformed(evt);
-            }
-        });
-        getContentPane().add(addMember, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 110, 240, 30));
-
-        updateMember.setText("Update Member Info");
-        updateMember.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                updateMemberActionPerformed(evt);
-            }
-        });
-        getContentPane().add(updateMember, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 110, 210, 30));
-
-        deleteMember.setText("Delete Member");
-        deleteMember.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                deleteMemberActionPerformed(evt);
-            }
-        });
-        getContentPane().add(deleteMember, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 160, 240, -1));
-
-        searchMember.setText("Search ");
-        searchMember.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                searchMemberActionPerformed(evt);
-            }
-        });
-        getContentPane().add(searchMember, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 159, 210, 30));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 930, 550));
 
         pack();
         setLocationRelativeTo(null);
@@ -488,6 +494,7 @@ public class MembersFrame extends javax.swing.JFrame {
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField memberField;
     private javax.swing.JTextField memberIDField;
