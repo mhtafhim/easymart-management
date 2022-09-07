@@ -49,8 +49,7 @@ public class LoginPage extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
-        jLabel3 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         txtloginEmail = new textfield.TextField();
         txtLoginPassword = new textfield.PasswordField();
@@ -58,49 +57,31 @@ public class LoginPage extends javax.swing.JFrame {
         LoginClear = new javax.swing.JButton();
         LoginExit = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/black-friday-elements-assortment.jpg"))); // NOI18N
+        jLabel2.setText("jLabel2");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel1.setBackground(new java.awt.Color(0, 153, 153));
-
-        jLabel3.setFont(new java.awt.Font("MV Boli", 1, 36)); // NOI18N
-        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setText("Easy Mart");
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(251, 251, 251)
-                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(242, Short.MAX_VALUE))
-        );
-
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 230, 600));
-
         jPanel2.setBackground(new java.awt.Color(140, 207, 207));
+        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        txtloginEmail.setBackground(new java.awt.Color(140, 207, 207));
+        txtloginEmail.setBackground(new java.awt.Color(255, 153, 51));
         txtloginEmail.setLabelText("Email");
+        jPanel2.add(txtloginEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 200, 362, 68));
 
-        txtLoginPassword.setBackground(new java.awt.Color(140, 207, 207));
+        txtLoginPassword.setBackground(new java.awt.Color(255, 153, 51));
         txtLoginPassword.setLabelText("Password");
         txtLoginPassword.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtLoginPasswordKeyPressed(evt);
             }
         });
+        jPanel2.add(txtLoginPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 290, 362, 67));
 
-        LoginButton.setBackground(new java.awt.Color(140, 207, 207));
+        LoginButton.setBackground(new java.awt.Color(255, 153, 0));
         LoginButton.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         LoginButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/login.png"))); // NOI18N
         LoginButton.setText("Login");
@@ -109,8 +90,9 @@ public class LoginPage extends javax.swing.JFrame {
                 LoginButtonActionPerformed(evt);
             }
         });
+        jPanel2.add(LoginButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 410, 128, 44));
 
-        LoginClear.setBackground(new java.awt.Color(140, 207, 207));
+        LoginClear.setBackground(new java.awt.Color(255, 153, 0));
         LoginClear.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         LoginClear.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/clear.png"))); // NOI18N
         LoginClear.setText("Clear");
@@ -119,8 +101,9 @@ public class LoginPage extends javax.swing.JFrame {
                 LoginClearActionPerformed(evt);
             }
         });
+        jPanel2.add(LoginClear, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 410, 125, 44));
 
-        LoginExit.setBackground(new java.awt.Color(140, 207, 207));
+        LoginExit.setBackground(new java.awt.Color(255, 153, 0));
         LoginExit.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         LoginExit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/exit small.png"))); // NOI18N
         LoginExit.setText("Exit");
@@ -129,51 +112,17 @@ public class LoginPage extends javax.swing.JFrame {
                 LoginExitActionPerformed(evt);
             }
         });
+        jPanel2.add(LoginExit, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 510, 120, 44));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
         jLabel1.setText("Login");
+        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 90, -1, -1));
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(104, 104, 104)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addComponent(txtloginEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 362, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtLoginPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 362, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGap(28, 28, 28)
-                                .addComponent(LoginButton, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(59, 59, 59)
-                                .addComponent(LoginClear, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(232, 232, 232)
-                        .addComponent(LoginExit, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(214, Short.MAX_VALUE))
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(54, 54, 54)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 72, Short.MAX_VALUE)
-                .addComponent(txtloginEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(txtLoginPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(53, 53, 53)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(LoginClear, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(LoginButton, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(57, 57, 57)
-                .addComponent(LoginExit, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(79, 79, 79))
-        );
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/black-friday-elements-assortment.jpg"))); // NOI18N
+        jLabel3.setText("jLabel3");
+        jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 910, -1));
 
-        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 0, 680, 600));
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 910, 600));
 
         pack();
         setLocationRelativeTo(null);
@@ -283,8 +232,8 @@ public class LoginPage extends javax.swing.JFrame {
     private javax.swing.JButton LoginClear;
     private javax.swing.JButton LoginExit;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private textfield.PasswordField txtLoginPassword;
     private textfield.TextField txtloginEmail;

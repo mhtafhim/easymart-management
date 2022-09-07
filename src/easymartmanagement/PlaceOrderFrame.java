@@ -212,7 +212,6 @@ public class PlaceOrderFrame extends javax.swing.JFrame {
         LogoutButton = new button.MyButton();
         myButton8 = new button.MyButton();
         myButton9 = new button.MyButton();
-        myButton10 = new button.MyButton();
         jPanel2 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
@@ -254,7 +253,6 @@ public class PlaceOrderFrame extends javax.swing.JFrame {
         PLACEORDERTABLE = new javax.swing.JTable();
         jLabel3 = new javax.swing.JLabel();
         cashierNameLabel = new javax.swing.JLabel();
-        myButton4 = new button.MyButton();
         PlaceOrderButton = new button.MyButton();
         removeAllListedItemButton = new button.MyButton();
 
@@ -310,10 +308,6 @@ public class PlaceOrderFrame extends javax.swing.JFrame {
             }
         });
         jPanel1.add(myButton9, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 220, 250, 70));
-
-        myButton10.setText("About");
-        myButton10.setRadius(80);
-        jPanel1.add(myButton10, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 310, 250, 70));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 280, 570));
 
@@ -694,10 +688,6 @@ public class PlaceOrderFrame extends javax.swing.JFrame {
         cashierNameLabel.setBackground(new java.awt.Color(204, 204, 255));
         cashierNameLabel.setText("Tafhim");
 
-        myButton4.setText("Print Bill");
-        myButton4.setBorderColor(new java.awt.Color(204, 204, 204));
-        myButton4.setRadius(30);
-
         PlaceOrderButton.setText("Place Order");
         PlaceOrderButton.setBorderColor(new java.awt.Color(204, 204, 204));
         PlaceOrderButton.setRadius(30);
@@ -745,9 +735,7 @@ public class PlaceOrderFrame extends javax.swing.JFrame {
                         .addComponent(cashierNameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(removeAllListedItemButton, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(50, 50, 50)
-                        .addComponent(myButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(37, 37, 37)
+                        .addGap(175, 175, 175)
                         .addComponent(PlaceOrderButton, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(40, 40, 40))))
         );
@@ -770,7 +758,6 @@ public class PlaceOrderFrame extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cashierNameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(myButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(PlaceOrderButton, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(removeAllListedItemButton, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -1307,8 +1294,6 @@ public class PlaceOrderFrame extends javax.swing.JFrame {
     private javax.swing.JTable jTable1;
     private javax.swing.JToggleButton jToggleButton1;
     private textfield.TextField memberIDField;
-    private button.MyButton myButton10;
-    private button.MyButton myButton4;
     private button.MyButton myButton8;
     private button.MyButton myButton9;
     private javax.swing.JLabel orderIDLabel;

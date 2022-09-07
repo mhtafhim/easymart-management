@@ -89,7 +89,6 @@
                       <Component id="gotoCashierButton" min="-2" pref="194" max="-2" attributes="0"/>
                       <Component id="EasyMembersButton" alignment="0" min="-2" pref="194" max="-2" attributes="0"/>
                       <Component id="ItemButton" alignment="0" min="-2" pref="194" max="-2" attributes="0"/>
-                      <Component id="aboutButton1" min="-2" pref="194" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace pref="26" max="32767" attributes="0"/>
               </Group>
@@ -109,9 +108,7 @@
                   <Component id="ItemButton" min="-2" pref="51" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="adminButton" min="-2" pref="51" max="-2" attributes="0"/>
-                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Component id="aboutButton1" min="-2" pref="51" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="106" max="-2" attributes="0"/>
                   <Component id="LogoutButton" min="-2" pref="51" max="-2" attributes="0"/>
                   <EmptySpace pref="51" max="32767" attributes="0"/>
               </Group>
@@ -180,15 +177,6 @@
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="adminButtonActionPerformed"/>
-          </Events>
-        </Component>
-        <Component class="button.MyButton" name="aboutButton1">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="About"/>
-            <Property name="radius" type="int" value="50"/>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="aboutButton1ActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>

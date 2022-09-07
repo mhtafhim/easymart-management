@@ -281,7 +281,6 @@ public class Dashboard extends javax.swing.JFrame {
         ItemButton = new button.MyButton();
         LogoutButton = new button.MyButton();
         adminButton = new button.MyButton();
-        aboutButton1 = new button.MyButton();
         jPanel2 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
@@ -408,14 +407,6 @@ public class Dashboard extends javax.swing.JFrame {
             }
         });
 
-        aboutButton1.setText("About");
-        aboutButton1.setRadius(50);
-        aboutButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                aboutButton1ActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -429,8 +420,7 @@ public class Dashboard extends javax.swing.JFrame {
                     .addComponent(AllReportButton, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(gotoCashierButton, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(EasyMembersButton, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(ItemButton, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(aboutButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(ItemButton, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(26, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -447,9 +437,7 @@ public class Dashboard extends javax.swing.JFrame {
                 .addComponent(ItemButton, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(adminButton, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(aboutButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(37, 37, 37)
+                .addGap(106, 106, 106)
                 .addComponent(LogoutButton, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(51, Short.MAX_VALUE))
         );
@@ -946,10 +934,6 @@ public class Dashboard extends javax.swing.JFrame {
         new adminPanelFrame().setVisible(true);
     }//GEN-LAST:event_adminButtonActionPerformed
 
-    private void aboutButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aboutButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_aboutButton1ActionPerformed
-
     private void refreshButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshButtonActionPerformed
         // TODO add your handling code here:
          refreshData();
@@ -995,7 +979,6 @@ public class Dashboard extends javax.swing.JFrame {
     private button.MyButton EasyMembersButton;
     private button.MyButton ItemButton;
     private button.MyButton LogoutButton;
-    private button.MyButton aboutButton1;
     private button.MyButton adminButton;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;
